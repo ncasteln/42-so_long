@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:39:32 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/10 10:59:02 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:42:42 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int		nc_dptr_size_x(char **s);
 char	**nc_dptr_deepcpy(char **p);
 void	nc_dptr_free(char **p);
 void	nc_dptr_print(char **p);
+void	lst_print(t_list *lst);
 
 #endif

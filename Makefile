@@ -6,12 +6,12 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/11 13:31:41 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/12 16:47:21 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-CFLAGS = -g -Wall -Wextra # ++++ ++++ ++++ ++++ ++++ +++update -Werror !!!!!
+CFLAGS = -g -Wall -Wextra #################################################################(-Werror)
 
 # ------------------------------------ MYLIB ------------------------------------
 MYLIB = $(LIBFT) $(FT_PRINTF) $(GNL) $(LIBNC)
@@ -31,15 +31,14 @@ GLFW = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 # ------------------------------------ SRCS ------------------------------------
 SRC = main.c \
 	window_settings.c \
-	state_op.c \
-	lst_op.c \
-	coord_op.c \
-	double_ptr_op.c \
+	state_print.c \
+	lst_to_dptr.c \
+	enemies_handling.c \
 	key_handling.c \
 	event_handling.c \
 	arg_validation.c \
 	map_validation.c \
-	movements.c \
+	move_handling.c \
 	path_validation.c \
 	map_building.c
 VPATH = ./src/

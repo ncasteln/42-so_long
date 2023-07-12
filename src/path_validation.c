@@ -6,15 +6,18 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/11 15:54:28 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/12 17:21:18 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/* This function make two things: counts the C and E elements, and returns
+when it finds a wall, the player position, an already found position or
+an enemy. In these cases returns (0) as false, and the tile is not overwritten*/
 static int count_item(char item, int *c, int *e)
 {
-	if (item == 'P' || item == '1' || item == ' ')
+	if (item == 'P' || item == '1' || item == ' ' || item == '!')
 		return (0);
 	if (item == 'C')
 		*c -= 1;
@@ -61,7 +64,7 @@ int		is_valid_path(t_state *game)
 	items[1] = game->e;
 	map_cpy = nc_dptr_deepcpy(game->map);
 	if (!map_cpy)
-		nc_exit("Could not create map_cpy", __FILE__, __func__, __LINE__);
+		return (0);
 	check_neighbors(map_cpy, game->p.y, game->p.x, items);
 	if (items[0] != 0 || items[0] != 0)
 	{

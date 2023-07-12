@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 11:38:13 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/10 11:00:47 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/12 15:42:40 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC = nc_is_valid_ext.c \
 	nc_dptr_size.c \
 	nc_dptr_deepcpy.c \
 	nc_dptr_free.c \
-	nc_dptr_print.c
+	nc_dptr_print.c \
+	nc_lst_print.c
 VPATH = ./src/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 OBJS_DIR = ./objs/

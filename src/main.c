@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/12 13:51:17 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/12 17:51:07 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,14 @@
 static void	init_game(t_state *game)
 {
 	game->map = NULL;
-
 	game->p.y = 0;
 	game->p.x = 0;
-
-	game->p.up = 0;
-	game->p.down = 0;
-	game->p.right = 0;
-	game->p.left = 0;
-	game->p.behind = 0;
-
 	game->e = 0;
-
 	game->c = 0;
-
 	game->mlx = NULL;
-
 	game->img = NULL;
-
 	game->txt = NULL;
+	game->steps = 0;
 }
 
 static void	free_state(t_state *game)
@@ -50,19 +39,13 @@ int32_t	main(int argc, char **argv)
 
 	init_game(&game);
 	validate(argc, argv, &game);
+	init_enemies(&game);
 	init_window(&game);
-
-	// // create hooks - keys and events
 	mlx_key_hook(game.mlx, handle_key, &game);
 	// mlx_loop_hook(game.mlx, update_map, &game);
-
-	// // create images and put into window
-	build_map(&game);
-
-	// // start the loop
+	init_map(&game);
 	mlx_loop(game.mlx);
-
-	free_state(&game);
+	free_state(&game); // ----- update
 	// state_print(&game);
 	// system("leaks so_long");
 	return (0);

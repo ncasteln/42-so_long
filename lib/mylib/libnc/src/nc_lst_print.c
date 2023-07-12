@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_ptr_op.c                                    :+:      :+:    :+:   */
+/*   nc_lst_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 16:15:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/10 13:48:32 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/12 15:41:56 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/12 15:46:17 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libnc.h"
 
-char	**lst_to_double_ptr(t_list *lst, int y)
+/* General lst function iteration to fill with ft_printf() when needed,
+depending on the content */
+void	lst_print(t_list *lst)
 {
-	char	**map;
-	int		i;
-
-	map = ft_calloc ((y + 1), sizeof(char *));
-	if (!map)
-		return (NULL);
-	i = 0;
-	while (i < y)
+	int i = 0;
+	while (lst && lst->next)
 	{
-		map[i] = ft_calloc (ft_strlen(lst->content), sizeof(char));
-		if (!map[i])
-			return (NULL); // free(everything)
-		ft_strlcpy(map[i], lst->content, ft_strlen(lst->content));
 		lst = lst->next;
 		i++;
 	}
-	map[i] = NULL;
-	return (map);
 }

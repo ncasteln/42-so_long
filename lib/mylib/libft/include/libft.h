@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:17:59 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/04/07 12:08:56 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:49:14 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+/* ------------------------------ LST -------------------------------- */
 typedef struct s_list
 {
 	void			*content;

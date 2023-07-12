@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:02:21 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/11 14:06:53 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/12 16:45:07 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	validate(int argc, char **argv, t_state *game)
 	is_valid_line(lst, game);
 
 	// cpy lst to dptr
-	game->map = lst_to_double_ptr(lst, ft_lstsize(lst));
+	game->map = lst_to_dptr(lst, ft_lstsize(lst));
 	ft_lstclear(&lst, del); // -------------------------------- del function ?
 	if (!game->map)
 		nc_exit("Unable to create map", __FILE__, __func__, __LINE__);// ------ --- ----// free()

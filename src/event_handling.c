@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:45:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/11 14:57:13 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:46:42 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 void	handle_event(void *param)
 {
 
+	(void) param;
 }
