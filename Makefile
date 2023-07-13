@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/13 14:44:51 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/13 16:18:34 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRC = main.c \
 	move_handling.c \
 	path_validation.c \
 	map_building.c \
-	free_all.c
+	free_all.c \
+	sl_error.c
 VPATH = ./src/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 OBJS_DIR = ./objs/

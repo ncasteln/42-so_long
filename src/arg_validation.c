@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:02:21 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 15:47:12 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:28:58 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ int	validate(int argc, char **argv, t_state *game)
 		return (0);
 	if (!is_valid_format(lst, game))
 		return (ft_lstclear(&lst, lst_delnode), 0);
-
 	game->map = lst_to_dptr(lst, ft_lstsize(lst));
 	ft_lstclear(&lst, lst_delnode);
 	if (!game->map)
 		return (0);
-
 	if (!is_valid_path(game))
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 15:21:30 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:28:25 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	init_img(t_state *game)
 	return (1);
 }
 
-int	init_map(void *param)
+int	build_map(void *param)
 {
 	int			y;
 	int			x;

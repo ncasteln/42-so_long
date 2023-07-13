@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_settings.c                                  :+:      :+:    :+:   */
+/*   sl_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 13:31:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 16:31:47 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/13 16:18:38 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/13 16:28:37 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	init_window(t_state *game)
+int	sl_error(int err)
 {
-	int	width;
-	int	height;
-	int	size_x;
-	int	size_y;
-
-	size_x = nc_dptr_size_x(game->map);
-	size_y = nc_dptr_size_y(game->map);
-	if (size_x > 40 || size_y > 25) // ------------------------------------  set new limit ?????
-		return (0);
-	width = size_x * 64;
-	height = size_y * 64;
-	game->mlx = mlx_init(width, height, "so_long", false);
-	if (!game->mlx)
-		return (0);
-	return (1);
+	ft_putendl_fd("Error", 2);
+	if (err == 1)
+		ft_putendl_fd("Invalid map", 2);
+	if (err == 2)
+		ft_putendl_fd("MLX failed", 2);
+	if (err == 3)
+		ft_putendl_fd("Map building failed", 2);
+	return (err);
 }

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 13:39:18 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:28:05 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_player
 typedef struct s_state
 {
 	struct s_player	p;
+	int				last_exit;
 	int				e;
 	int				c;
 	char			**map;
@@ -53,8 +54,5 @@ typedef struct s_state
 	struct	s_txt	*txt;
 	mlx_t			*mlx;
 }				t_state;
-
-// ------------------------------ GRPHIC STATE ---------------------------------
-
 
 #endif
