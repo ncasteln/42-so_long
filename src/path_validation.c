@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/12 17:21:18 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:53:36 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ when it finds a wall, the player position, an already found position or
 an enemy. In these cases returns (0) as false, and the tile is not overwritten*/
 static int count_item(char item, int *c, int *e)
 {
-	if (item == 'P' || item == '1' || item == ' ' || item == '!')
+	if (item == 'P' || item == '1' || item == ' ')
 		return (0);
 	if (item == 'C')
 		*c -= 1;
@@ -55,7 +55,7 @@ static void	check_neighbors(char **map, int y, int x, int *items)
 	}
 }
 
-int		is_valid_path(t_state *game)
+int	is_valid_path(t_state *game)
 {
 	int		items[2];
 	char	**map_cpy;
@@ -66,11 +66,7 @@ int		is_valid_path(t_state *game)
 	if (!map_cpy)
 		return (0);
 	check_neighbors(map_cpy, game->p.y, game->p.x, items);
-	if (items[0] != 0 || items[0] != 0)
-	{
-		nc_dptr_free(map_cpy);
-		// free other stuff
-		nc_exit("Invalid path", __FILE__, __func__, __LINE__);
-	}
+	if (items[0] != 0 || items[1] != 0)
+		return (nc_dptr_free(map_cpy), 0);
 	return (nc_dptr_free(map_cpy), 1);
 }

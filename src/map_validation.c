@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/11 11:08:50 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:34:32 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,16 @@ static int	is_duplicate(char c, t_state *game, int y, int x)
 	if (c == 'P')
 	{
 		if (game->p.x || game->p.y)
-			nc_exit("Too many P items in the map", __FILE__, __func__, __LINE__);
+			return (0);
 		game->p.y = y;
 		game->p.x = x;
+	}
+	if (c == 'E')
+	{
+		if (game->e)
+			return (0);
+		else
+			game->e += 1;
 	}
 	return (0);
 }
@@ -39,7 +46,7 @@ static int	is_duplicate(char c, t_state *game, int y, int x)
 static int	is_valid_item(char c)
 {
 	if (c == 'P' || c == '1' || c == 'E' || c == '0' || c == 'C')
-			return (1);
+		return (1);
 	return (0);
 }
 
@@ -55,11 +62,11 @@ static int	is_valid_mid_line(const char *curr_line, t_state *game, int y)
 		if ((x > 0 && x < ft_strlen(curr_line) - 2))
 		{
 			if (!is_valid_item(curr_line[x]))
-				nc_exit("Invalid item", __FILE__, __func__, __LINE__);
+				return (0);
 			if (curr_line[x] == 'P')
 				is_duplicate('P', game, y, x);
 			if (curr_line[x] == 'E')
-				game->e += 1;
+				is_duplicate('E', game, y, x);
 			if (curr_line[x] == 'C')
 				game->c += 1;
 		}
@@ -103,30 +110,45 @@ static int	is_valid_size(t_list *lst) // necessary function?
 	return (1);
 }
 
-int	is_valid_line(t_list *lst, t_state *game)
+/* This function check the line format and call other functions which
+check other validation requirements (n of items, kind of items etc.) */
+static int	is_valid_line(t_state *game, t_list *lst)
 {
-	int		y;
-	t_list	*node;
+	int	y;
 
-	node = lst;
-	if (!(is_valid_first_last_line(node->content)))
-		nc_exit("Invalid line", __FILE__, __func__, __LINE__);	// lstclear()
-	node = node->next;
+	if (!(is_valid_first_last_line(lst->content)))
+		return (0);
+	lst = lst->next;
 	y = 0;
-	while (node->next)
+	while (lst->next)
 	{
 		y++;
-		if (!is_valid_mid_line(node->content, game, y))
-			nc_exit("Invalid line", __FILE__, __func__, __LINE__); //lstclear()
-		node = node->next;
+		if (!is_valid_mid_line(lst->content, game, y))
+			return (0);
+		lst = lst->next;
 	}
-	if (!(is_valid_first_last_line(node->content)))
-		nc_exit("Invalid line", __FILE__, __func__, __LINE__); //lstclear()
-	if (!(game->p.x) || !(game->e) || !(game->c))
-		nc_exit("Some items left", __FILE__, __func__, __LINE__); //lstclear()
-	if (!(is_rectangle(lst)))
-		nc_exit("Map has too many angles", __FILE__, __func__, __LINE__); //lstclear()
-	if (!(is_valid_size(lst)))
-		nc_exit("Wrong map size (too little)", __FILE__, __func__, __LINE__); //lstclear()
+	if (!(is_valid_first_last_line(lst->content)))
+		return (0);
 	return (1);
 }
+
+int	is_valid_format(t_list *lst, t_state *game)
+{
+	if (!is_valid_line(game, lst))
+	{
+		// ft_lstclear(&lst, lst_delnode); --- /???
+		return (0);
+	}
+	if (!(game->p.x) || !(game->e) || !(game->c))
+		return (0);
+	if (!(is_rectangle(lst)))
+		return (0);
+	if (!(is_valid_size(lst)))
+		return (0);
+	return (1);
+}
+
+
+
+
+

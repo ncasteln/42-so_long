@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:27:11 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/11 14:05:33 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:50:44 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**nc_dptr_deepcpy(char **src)
 	i = 0;
 	while (src[i])
 	{
-		p[i] = malloc (sizeof(char) * (ft_strlen(src[i])));
+		p[i] = malloc (sizeof(char) * (ft_strlen(src[i]) + 1));
 		if (!p[i])
 			return (nc_dptr_free(p), src = NULL, NULL);
 		j = 0;

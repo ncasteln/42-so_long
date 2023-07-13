@@ -6,20 +6,11 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/12 17:51:12 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:42:43 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	set_steps(t_state *game)
-{
-	const char *steps;
-
-	game->steps += 1;
-	ft_printf("Steps done: %d\n", game->steps);
-	game->img->wall = mlx_put_string(game->mlx, "Steps: ", game->mlx->width / 64, game->mlx->height / 64);
-}
 
 static void	redraw_collectibles(t_state *game)
 {
@@ -28,7 +19,6 @@ static void	redraw_collectibles(t_state *game)
 
 	mlx_delete_image(game->mlx, game->img->c);
 	game->img->c = mlx_texture_to_image(game->mlx, game->txt->c);
-
 	y = 0;
 	while (y < nc_dptr_size_y(game->map))
 	{
@@ -45,10 +35,10 @@ static void	redraw_collectibles(t_state *game)
 
 void	update_map(t_state *game, int next_p_y, int next_p_x)
 {
-	game->map[game->p.y][game->p.x] = '0'; 	// put groudn on plpace of player
-	game->p.y = next_p_y;					// change player position
+	game->map[game->p.y][game->p.x] = '0';
+	game->p.y = next_p_y;
 	game->p.x = next_p_x;
-	game->map[next_p_y][next_p_x] = 'P';	// put player tile on new player position
+	game->map[next_p_y][next_p_x] = 'P';
 }
 
 /* The function accept the inverement value of each coordinate */
@@ -67,11 +57,6 @@ void	move_player(t_state *game, int y, int x)
 	}
 	else if (game->map[next_p_y][next_p_x] == '0')
 		update_map(game, next_p_y, next_p_x);
-	else if (game->map[next_p_y][next_p_x] == '!')
-	{
-		ft_printf(" ***** GAME OVER ****\n");
-		exit(1);
-	}
 }
 
 void	handle_move(t_state *game, int y, int x)
@@ -88,7 +73,8 @@ int	is_possible_move(t_state *game, int y, int x)
 	int	next_p_x;
 	int	cell;
 
-	set_steps(game);
+	game->steps += 1;
+	ft_printf("Steps: %d\n", game->steps);
 	next_p_y = game->p.y + y;
 	next_p_x = game->p.x + x;
 	cell = game->map[next_p_y][next_p_x];
@@ -96,8 +82,8 @@ int	is_possible_move(t_state *game, int y, int x)
 		return (1);
 	if (cell == 'E' && game->c == 0)
 	{
-		exit (1);  // -------------------------- game finished !!
-		return (1);
+		mlx_close_window(game->mlx);
+		return (0);
 	}
 	return (0);
 }

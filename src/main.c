@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/12 17:51:07 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:11:03 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,31 @@ static void	init_game(t_state *game)
 	game->steps = 0;
 }
 
-static void	free_state(t_state *game)
-{
-	if (game->map)
-		nc_dptr_free(game->map);
-	// if (game->mlx)
-		// mlx free()
-}
-
 int32_t	main(int argc, char **argv)
 {
 	t_state	game;
 
 	init_game(&game);
-	validate(argc, argv, &game);
-	init_enemies(&game);
-	init_window(&game);
+	if (!validate(argc, argv, &game))
+		return (free_all(&game), 1);
+
+
+	if (!init_window(&game))
+		return (free_all(&game), 1);
+
+
 	mlx_key_hook(game.mlx, handle_key, &game);
-	// mlx_loop_hook(game.mlx, update_map, &game);
-	init_map(&game);
+	if (!init_map(&game))
+		return (free_all(&game), 1);
 	mlx_loop(game.mlx);
-	free_state(&game); // ----- update
-	// state_print(&game);
+
+	mlx_terminate(game.mlx);
+	free_all(&game); // ----- update
 	// system("leaks so_long");
 	return (0);
 }
+
+// init_enemies(&game);
+	//
+// mlx_loop_hook(game.mlx, update_map, &game);
+

@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/12 16:47:21 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/13 14:44:51 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ MLX42 = $(MLX42_DIR)build/libmlx42.a
 MLX42_DIR = ./lib/MLX42/
 
 # ------------------------------------ GLFW ------------------------------------
-GLFW = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+# GLFW = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+GLFW = -lglfw -L"/goinfre/ncasteln/.brew/Cellar/glfw/3.3.8/lib"
 
 # ------------------------------------ SRCS ------------------------------------
 SRC = main.c \
@@ -40,7 +41,8 @@ SRC = main.c \
 	map_validation.c \
 	move_handling.c \
 	path_validation.c \
-	map_building.c
+	map_building.c \
+	free_all.c
 VPATH = ./src/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 OBJS_DIR = ./objs/

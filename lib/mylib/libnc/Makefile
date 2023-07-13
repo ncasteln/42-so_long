@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 11:38:13 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/12 15:42:40 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/13 10:25:09 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME = libnc.a
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = nc_is_valid_ext.c \
-	nc_exit.c \
 	nc_dptr_size.c \
 	nc_dptr_deepcpy.c \
 	nc_dptr_free.c \

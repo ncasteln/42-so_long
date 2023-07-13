@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 16:09:59 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/12 17:22:22 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/13 12:24:30 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	position_enemy(t_state *game, int enemy_index)
 void	init_enemies(t_state *game)
 {
 	int	n_ground;
-	int	*ground_indexes;
+	// int	*ground_indexes;
 	int	enemy_index;
 
 	n_ground = get_n_ground(game->map);
