@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 09:05:08 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:28:26 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "MLX42.h"
 # include "so_long_struct.h"
 
-# include <fcntl.h>
+# include <fcntl.h>	// open() and close() fd
 
 // -------------------------------- VALIDATION ---------------------------------
 int		validate(int argc, char **argv, t_state *game);
@@ -38,8 +38,7 @@ void	redraw_items(t_state *game, char c);
 
 // ------------------------------------ MOVES -----------------------------------
 int		is_possible_move(t_state *game, int y, int x);
-void	draw_player(t_state *game, int y, int x);
-void	move_player(t_state *game, int y, int x);
+void	move_char(t_state *game, int y, int x);
 
 // ------------------------------- FREE UTILS ---------------------------------
 void	free_all(t_state *game);

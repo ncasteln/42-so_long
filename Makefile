@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/17 08:25:50 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/17 10:39:15 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,25 @@ SRC = main.c \
 	map_drawing.c \
 	free_all.c \
 	sl_error.c
-VPATH = ./src/
+VPATH = ./src/:./src_bonus/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
+OBJS_BONUS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 OBJS_DIR = ./objs/
+
+# --------------------------------- BONUS SRCS ---------------------------------
+SRC_BONUS = main.c \
+	window_settings.c \
+	state_print.c \
+	lst_to_dptr.c \
+	key_handling.c \
+	arg_validation.c \
+	map_validation.c \
+	move_calc.c \
+	path_validation.c \
+	map_drawing.c \
+	free_all.c \
+	sl_error.c
+OBJS_BONUS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 
 # ------------------------------------ INCLUDES --------------------------------
 INCLUDE = -I ./include/ \
@@ -57,10 +73,20 @@ INCLUDE = -I ./include/ \
 # ------------------------------------ RULES -----------------------------------
 all: $(NAME)
 
+bonus: $(NAME)_bonus
+
 $(NAME): $(MYLIB) $(MLX42) $(OBJS)
 	@echo "$(NC)Compiling $@ executable file..."
 	@$(CC) $(CFLAGS) \
 	$(OBJS) $(MYLIB) $(MLX42) \
+	$(GLFW) \
+	-o $@
+	@echo "$(GREEN)	$@ successfully compiled!"
+
+$(NAME)_bonus: $(MYLIB) $(MLX42) $(OBJS_BONUS)
+	@echo "$(NC)Compiling $@ executable file..."
+	@$(CC) $(CFLAGS) \
+	$(OBJS_BONUS) $(MYLIB) $(MLX42) \
 	$(GLFW) \
 	-o $@
 	@echo "$(GREEN)	$@ successfully compiled!"
@@ -85,7 +111,7 @@ clean:
 
 fclean: clean
 	@echo "$(NC)Destroying library dependencies..."
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(NAME)_bonus
 	@$(MAKE) fclean -C $(MYLIB_DIR)
 
 re: fclean all
