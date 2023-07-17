@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_handling_bonus.c                             :+:      :+:    :+:   */
+/*   display_messages.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 11:14:44 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 13:59:28 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/17 14:04:14 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/17 14:25:30 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-static void	set_counter(t_state *game)
+void	display_end(t_state *game)
 {
-	if (game->counter == 101)
-		game->counter = 0;
-	game->counter++;
+
 }
 
-void	handle_event(void *param)
+void	display_steps(t_state *game)
 {
-	t_state		*game;
-
-	game = (t_state *) param;
-	set_counter(game);
-	if (game->counter % 25 == 0)
-		move_npc(game);
+	game->steps += 1;
+	if (game->msg)
+		free(game->msg);
+	game->msg = ft_itoa(game->steps);
+	redraw_items(game, 'S');
 }

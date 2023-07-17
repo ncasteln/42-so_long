@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:20:43 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 12:34:11 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:58:57 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@ static void	swap_position(t_state *game, int next_y, int next_x)
 	game->n.x = next_x;
 	game->map[next_y][next_x] = 'N';
 }
+int	is_blocked(t_state *game)
+{
+	if (game->map[game->n.y - 1][game->n.x] == '0')
+		return (0);
+	if (game->map[game->n.y - 1][game->n.x + 1] == '0')
+		return (0);
+	if (game->map[game->n.y][game->n.x + 1] == '0')
+		return (0);
+	if (game->map[game->n.y + 1][game->n.x + 1] == '0')
+		return (0);
+	if (game->map[game->n.y + 1][game->n.x] == '0')
+		return (0);
+	if (game->map[game->n.y + 1][game->n.x - 1] == '0')
+		return (0);
+	if (game->map[game->n.y][game->n.x - 1] == '0')
+		return (0);
+	if (game->map[game->n.y - 1][game->n.x - 1] == '0')
+		return (0);
+	return (1);
+}
 
 void	move_npc(t_state *game)
 {
@@ -53,7 +73,10 @@ void	move_npc(t_state *game)
 
 	next_npc.y = 0;
 	next_npc.x = 0;
-	find_move(game, &next_npc);
-	swap_position(game, game->n.y + next_npc.y, game->n.x + next_npc.x);
-	redraw_items(game, 'N');
+	if (!is_blocked(game))
+	{
+		find_move(game, &next_npc);
+		swap_position(game, game->n.y + next_npc.y, game->n.x + next_npc.x);
+		redraw_items(game, 'N');
+	}
 }

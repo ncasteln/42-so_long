@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 13:46:20 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:23:39 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	init_img(t_state *game)
 	game->img->ground = mlx_texture_to_image(game->mlx, game->txt->ground);
 	game->img->wall = mlx_texture_to_image(game->mlx, game->txt->wall);
 	game->img->n = mlx_texture_to_image(game->mlx, game->txt->n);
-	game->img->steps = mlx_put_string(game->mlx, "0", 0, 0);
+	game->img->msg = mlx_put_string(game->mlx, "0", 0, 0);
 	return (1);
 }
 
@@ -62,8 +62,8 @@ void	reset_image(t_state *game, char c)
 	}
 	else if (c == 'S')
 	{
-		mlx_delete_image(game->mlx, game->img->steps);
-		game->img->steps = mlx_put_string(game->mlx, ft_itoa(game->steps), 0, 0);
+		mlx_delete_image(game->mlx, game->img->msg);
+		game->img->msg = mlx_put_string(game->mlx, game->msg, 0, 0);
 	}
 }
 
@@ -107,9 +107,9 @@ static void	images_to_window(t_state *game, int y, int x)
 
 int	draw_map(void *param)
 {
-	int			y;
-	int			x;
-	t_state 	*game;
+	int		y;
+	int		x;
+	t_state	*game;
 
 	game = (t_state *) param;
 	if (!init_img(game))
@@ -122,7 +122,7 @@ int	draw_map(void *param)
 		{
 			mlx_image_to_window(game->mlx, game->img->ground, x * 64, y * 64); // protect from -1 ???
 			images_to_window(game, y, x);
-			mlx_image_to_window(game->mlx, game->img->steps, 0, 0); // protect from -1 ???
+			mlx_image_to_window(game->mlx, game->img->msg, 0, 0); // protect from -1 ???
 			x++;
 		}
 		y++;

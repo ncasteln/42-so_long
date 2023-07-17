@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:49:15 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 12:45:40 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:25:09 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static void	move_pc(mlx_key_data_t keydata, t_state *game)
 		move_char(game, 0, -1);
 	if (game->map[game->p.y][game->p.x] == 'E' && game->c == 0)
 	{
-		game->steps += 1;
-		ft_printf("Steps: %d\n", game->steps);
+		display_steps(game);
 		mlx_close_window(game->mlx);
 	}
 }

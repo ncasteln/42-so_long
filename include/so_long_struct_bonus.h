@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 13:18:28 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:27:09 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_img
 	mlx_image_t	*c;
 	mlx_image_t	*wall;
 	mlx_image_t	*ground;
-	mlx_image_t	*steps;
+	mlx_image_t	*msg;
 }			t_img;
 
 // ---------------------------------- PLAYER -----------------------------------
@@ -55,6 +55,7 @@ typedef struct s_state
 	int				counter;
 	char			**map;
 	int				steps;
+	char			*msg;
 	struct	s_img	*img;
 	struct	s_txt	*txt;
 	mlx_t			*mlx;

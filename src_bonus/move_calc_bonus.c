@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 13:24:06 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:25:17 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,9 @@ int	pc_can_move(t_state *game, int y, int x)
 	next_px = game->p.x + x;
 	cell = game->map[next_py][next_px];
 	if (cell == '0' || cell == 'C' || (cell == 'E' && game->c > 0))
-	{
-		game->steps += 1;
-		ft_printf("Steps: %d\n", game->steps);
-		redraw_items(game, 'S');
-		return (1);
-	}
+		return (display_steps(game), 1);
 	else if ((cell == 'E' && game->c == 0) || cell == 'N')
-	{
-		game->steps += 1;
-		ft_printf("Steps: %d\n", game->steps);
-		mlx_close_window(game->mlx);
-		redraw_items(game, 'S');
-		return (1);
-	}
+		return (mlx_close_window(game->mlx), 1); // --------------- REMOVE ????
 	return (0);
 }
 
