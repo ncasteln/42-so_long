@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 14:25:17 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:06:32 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,16 @@ int	pc_can_move(t_state *game, int y, int x)
 	next_px = game->p.x + x;
 	cell = game->map[next_py][next_px];
 	if (cell == '0' || cell == 'C' || (cell == 'E' && game->c > 0))
-		return (display_steps(game), 1);
+	{
+		display_steps(game);
+		return (1);
+	}
 	else if ((cell == 'E' && game->c == 0) || cell == 'N')
-		return (mlx_close_window(game->mlx), 1); // --------------- REMOVE ????
+	{
+		display_steps(game);
+		// mlx_close_window(game->mlx);
+		return (1);
+	}
 	return (0);
 }
 
@@ -103,7 +110,7 @@ int	npc_can_move(t_state *game, int y, int x)
 		return (1);
 	if (cell == 'P')
 	{
-		mlx_close_window(game->mlx);
+		mlx_close_window(game->mlx); // ----- ENDGAME ????
 		return (1);
 	}
 	return (0);

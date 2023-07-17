@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:14:44 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 13:59:28 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:05:46 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	handle_event(void *param)
 
 	game = (t_state *) param;
 	set_counter(game);
-	if (game->counter % 25 == 0)
+	if (game->counter % 33 == 0)
 		move_npc(game);
 }

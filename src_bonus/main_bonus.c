@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 14:27:08 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:04:45 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	init_game(t_state *game)
 	game->is_exit = 0;
 	game->c = 0;
 	game->counter = 0;
-	game->msg = NULL;
 	game->mlx = NULL;
 	game->img = NULL;
 	game->txt = NULL;
+	game->msg = NULL;
 }
 
 int32_t	main(int argc, char **argv)

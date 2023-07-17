@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 14:24:55 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:00:04 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 # include "libnc.h"
 # include "MLX42.h"
 # include "so_long_struct_bonus.h"
-
 # include <fcntl.h>	// open() and close() fd
-# include <math.h>
+# include <math.h>	// rand() func
 
 // -------------------------------- VALIDATION ---------------------------------
 int		validate(int argc, char **argv, t_state *game);
