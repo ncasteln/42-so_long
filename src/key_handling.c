@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:49:15 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 17:21:13 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:25:14 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	control_window(mlx_key_data_t keydata, t_state *game)
 static void	move_character(mlx_key_data_t keydata, t_state *game)
 {
 	if (keydata.key	== MLX_KEY_W && is_possible_move(game, -1, 0))
-		handle_move(game, -1, 0);
+		move_player(game, -1, 0);
 	if (keydata.key	== MLX_KEY_D && is_possible_move(game, 0, +1))
-		handle_move(game, 0, +1);
+		move_player(game, 0, +1);
 	if (keydata.key	== MLX_KEY_S && is_possible_move(game, +1, 0))
-		handle_move(game, +1, 0);
+		move_player(game, +1, 0);
 	if (keydata.key	== MLX_KEY_A && is_possible_move(game, 0, -1))
-		handle_move(game, 0, -1);
+		move_player(game, 0, -1);
 }
 
 void	handle_key(mlx_key_data_t keydata, void *param)

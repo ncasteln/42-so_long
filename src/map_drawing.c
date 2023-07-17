@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_building.c                                     :+:      :+:    :+:   */
+/*   map_drawing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 17:28:25 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:25:28 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,38 @@ static int	init_img(t_state *game)
 	return (1);
 }
 
-int	build_map(void *param)
+void	redraw_items(t_state *game, char c)
+{
+	int	y;
+	int	x;
+
+	if (c == 'C')
+	{
+		mlx_delete_image(game->mlx, game->img->c);
+		game->img->c = mlx_texture_to_image(game->mlx, game->txt->c);
+	}
+	else if (c == 'P')
+	{
+		mlx_delete_image(game->mlx, game->img->p);
+		game->img->p = mlx_texture_to_image(game->mlx, game->txt->p);
+	}
+	y = 0;
+	while (y < nc_dptr_size_y(game->map))
+	{
+		x = 0;
+		while (x < nc_dptr_size_x(game->map))
+		{
+			if (game->map[y][x] == 'C')
+				mlx_image_to_window(game->mlx, game->img->c, x * 64, y * 64);
+			else if (game->map[y][x] == 'P')
+				mlx_image_to_window(game->mlx, game->img->p, x * 64, y * 64);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	draw_map(void *param)
 {
 	int			y;
 	int			x;

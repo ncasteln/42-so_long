@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 17:28:18 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:16:01 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_game(t_state *game)
 	game->img = NULL;
 	game->txt = NULL;
 	game->steps = 0;
-	game->last_exit = 0;
+	game->is_exit = 0;
 }
 
 int32_t	main(int argc, char **argv)
@@ -36,16 +36,10 @@ int32_t	main(int argc, char **argv)
 	if (!init_window(&game))
 		return (free_all(&game), sl_error(2));
 	mlx_key_hook(game.mlx, handle_key, &game);
-	if (!build_map(&game))
+	if (!draw_map(&game))
 		return (free_all(&game), sl_error(3));
 	mlx_loop(game.mlx);
-	// system("leaks so_long");
 	free_all(&game);
 	mlx_terminate(game.mlx);
 	return (ft_putendl_fd("****** Game Over ******", 1), 0);
 }
-
-// init_enemies(&game);
-	//
-// mlx_loop_hook(game.mlx, update_map, &game);
-

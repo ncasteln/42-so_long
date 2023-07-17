@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/13 16:18:34 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/17 08:25:50 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,14 +34,12 @@ SRC = main.c \
 	window_settings.c \
 	state_print.c \
 	lst_to_dptr.c \
-	enemies_handling.c \
 	key_handling.c \
-	event_handling.c \
 	arg_validation.c \
 	map_validation.c \
-	move_handling.c \
+	move_calc.c \
 	path_validation.c \
-	map_building.c \
+	map_drawing.c \
 	free_all.c \
 	sl_error.c
 VPATH = ./src/

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 16:26:51 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:05:08 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int		init_window(t_state *game);
 
 // ------------------------------ KEYS & EVENTS --------------------------------
 void	handle_key(mlx_key_data_t keydata, void *param);
-// void	handle_event(void *param);  // ---- clean
 
 // ------------------------------------- MAP -----------------------------------
-int		build_map(void *param);
+int		draw_map(void *param);
+void	redraw_items(t_state *game, char c);
 
 // ------------------------------------ MOVES -----------------------------------
 int		is_possible_move(t_state *game, int y, int x);
-void	handle_move(t_state *game, int y, int x);
+void	draw_player(t_state *game, int y, int x);
 void	move_player(t_state *game, int y, int x);
 
 // ------------------------------- FREE UTILS ---------------------------------
@@ -50,8 +50,5 @@ int		sl_error(int err);
 void	state_print(t_state *game);
 void	lst_print(t_list *lst);
 char	**lst_to_dptr(t_list *lst, int y);
-
-// ------------------------------------- ENEMY ----------------------------------
-// void	init_enemies(t_state *game);
 
 #endif
