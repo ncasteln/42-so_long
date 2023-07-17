@@ -6,11 +6,11 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:15:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 15:38:20 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:50:57 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /* Convert a lst whose content is a char *s to a dptr who points to each str */
 char	**lst_to_dptr(t_list *lst, int y)

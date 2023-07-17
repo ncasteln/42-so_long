@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sl_error.c                                         :+:      :+:    :+:   */
+/*   event_handling_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/13 16:18:38 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 09:46:45 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/17 11:14:44 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/17 12:51:52 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-int	sl_error(int err)
+static void	set_counter(t_state *game)
 {
-	ft_putendl_fd("Error", 2);
-	if (err == 1)
-		ft_putendl_fd("Invalid map", 2);
-	if (err == 2)
-		ft_putendl_fd("MLX failed", 2);
-	if (err == 3)
-		ft_putendl_fd("Map building failed", 2);
-	return (err);
+	if (game->counter == 101)
+		game->counter = 0;
+	game->counter++;
+}
+
+void	handle_event(void *param)
+{
+	t_state		*game;
+
+	game = (t_state *) param;
+	set_counter(game);
+	if (game->counter % 25 == 0 && game->counter < 50)
+		move_npc(game);
 }

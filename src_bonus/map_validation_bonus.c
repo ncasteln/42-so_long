@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validation.c                                   :+:      :+:    :+:   */
+/*   map_validation_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 09:44:20 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:10:05 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	is_valid_first_last_line(const char *s)
 {
@@ -45,7 +45,7 @@ static int	is_duplicate(char c, t_state *game, int y, int x)
 
 static int	is_valid_item(char c)
 {
-	if (c == 'P' || c == '1' || c == 'E' || c == '0' || c == 'C')
+	if (c == 'P' || c == '1' || c == 'E' || c == '0' || c == 'C' || c == 'N')
 		return (1);
 	return (0);
 }
@@ -69,6 +69,11 @@ static int	is_valid_mid_line(const char *curr_line, t_state *game, int y)
 					return (0);
 			if (curr_line[x] == 'C')
 				game->c += 1;
+			if (curr_line[x] == 'N') // assumes that there is only one enemy
+			{
+				game->n.y = y;
+				game->n.x = x;
+			}
 		}
 		if ((x == ft_strlen(curr_line) - 2) && (curr_line[x] != '1'))
 			return (0);

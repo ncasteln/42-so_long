@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_calc.c                                        :+:      :+:    :+:   */
+/*   move_calc_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 10:28:59 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:24:06 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /* Set the current position of player to '0', calculates its new position
 and set the map cell to its char - like a swap */
@@ -73,11 +73,12 @@ void	move_char(t_state *game, int y, int x)
 	state_print(game);
 }
 
-int	is_possible_move(t_state *game, int y, int x)
+/* Verify if player can move in that direction */
+int	pc_can_move(t_state *game, int y, int x)
 {
-	int	next_py;
-	int	next_px;
-	char cell;
+	int		next_py;
+	int		next_px;
+	char	cell;
 
 	next_py = game->p.y + y;
 	next_px = game->p.x + x;
@@ -86,15 +87,45 @@ int	is_possible_move(t_state *game, int y, int x)
 	{
 		game->steps += 1;
 		ft_printf("Steps: %d\n", game->steps);
+		redraw_items(game, 'S');
 		return (1);
 	}
-	else if (cell == 'E' && game->c == 0)
+	else if ((cell == 'E' && game->c == 0) || cell == 'N')
 	{
 		game->steps += 1;
 		ft_printf("Steps: %d\n", game->steps);
 		mlx_close_window(game->mlx);
-		return (0);
+		redraw_items(game, 'S');
+		return (1);
 	}
+	return (0);
+}
+
+int	npc_can_move(t_state *game, int y, int x)
+{
+	int		next_ny;
+	int		next_nx;
+	char	cell;
+
+	next_ny = game->n.y + y;
+	next_nx = game->n.x + x;
+	cell = game->map[next_ny][next_nx];
+	if (cell == '0')
+		return (1);
+	if (cell == 'P')
+	{
+		mlx_close_window(game->mlx);
+		return (1);
+	}
+	return (0);
+}
+
+int	is_possible_move(t_state *game, int y, int x, char c)
+{
+	if (c == 'P')
+		return (pc_can_move(game, y, x));
+	else if (c == 'N')
+		return (npc_can_move(game, y, x));
 	return (0);
 }
 

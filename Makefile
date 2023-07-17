@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/17 10:39:15 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/17 12:21:33 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,24 +42,23 @@ SRC = main.c \
 	map_drawing.c \
 	free_all.c \
 	sl_error.c
+SRC_BONUS = main_bonus.c \
+	window_settings_bonus.c \
+	state_print_bonus.c \
+	lst_to_dptr_bonus.c \
+	key_handling_bonus.c \
+	arg_validation_bonus.c \
+	map_validation_bonus.c \
+	move_calc_bonus.c \
+	path_validation_bonus.c \
+	map_drawing_bonus.c \
+	free_all_bonus.c \
+	sl_error_bonus.c \
+	event_handling_bonus.c \
+	npc_move_calc_bonus.c
 VPATH = ./src/:./src_bonus/
-OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
-OBJS_BONUS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 OBJS_DIR = ./objs/
-
-# --------------------------------- BONUS SRCS ---------------------------------
-SRC_BONUS = main.c \
-	window_settings.c \
-	state_print.c \
-	lst_to_dptr.c \
-	key_handling.c \
-	arg_validation.c \
-	map_validation.c \
-	move_calc.c \
-	path_validation.c \
-	map_drawing.c \
-	free_all.c \
-	sl_error.c
+OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 OBJS_BONUS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 
 # ------------------------------------ INCLUDES --------------------------------
