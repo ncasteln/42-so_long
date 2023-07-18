@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 13:03:56 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:00:32 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int32_t	main(int argc, char **argv)
 
 	init_game(&game);
 	if (!validate(argc, argv, &game))
-		return (free_all(&game), sl_error(1));
+		return (free_all(&game), err_print(1));
 	if (!init_window(&game))
-		return (free_all(&game), sl_error(2));
+		return (free_all(&game), err_print(2));
 	mlx_loop_hook(game.mlx, handle_event, &game);
 	mlx_key_hook(game.mlx, handle_key, &game);
 	if (!draw_map(&game))
-		return (free_all(&game), sl_error(3));
+		return (free_all(&game), err_print(3));
 	mlx_loop(game.mlx);
 	free_all(&game);
 	mlx_terminate(game.mlx);

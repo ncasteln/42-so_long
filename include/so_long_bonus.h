@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:35:02 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:01:43 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_all(t_state *game);
 void	lst_delnode(void *line);
 
 // ------------------------------- OTHER UTILS ---------------------------------
-int		sl_error(int err);
+int		err_print(int err);
 void	state_print(t_state *game);
 void	lst_print(t_list *lst);
 char	**lst_to_dptr(t_list *lst, int y);

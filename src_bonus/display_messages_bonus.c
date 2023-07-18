@@ -6,11 +6,23 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:04:14 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:48:59 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:01:04 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+int	err_print(int err)
+{
+	ft_putendl_fd("Error", 2);
+	if (err == 1)
+		ft_putendl_fd("Invalid map", 2);
+	if (err == 2)
+		ft_putendl_fd("MLX failed", 2);
+	if (err == 3)
+		ft_putendl_fd("Map building failed", 2);
+	return (err);
+}
 
 void	display_end(t_state *game)
 {
