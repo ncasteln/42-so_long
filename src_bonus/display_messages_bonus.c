@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:04:14 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:24:24 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:48:30 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,21 @@ void	display_end(t_state *game)
 
 	mid_y = (game->mlx->height / 2) - 10;
 	mid_x = (game->mlx->width / 2) - ((ft_strlen("Game Over [press Esc]") * 10) / 2);
-	game->msg->end_img = mlx_put_string(game->mlx, "Game Over [press Esc]", mid_x * 64, mid_y * 64); // make central
+	game->img->end_img = mlx_put_string(game->mlx, "Game Over [press Esc]", mid_x, mid_y);
 }
 
 void	display_steps(t_state *game)
 {
+	char	*temp_1;
+	char	*temp_2;
+
 	game->steps += 1;
-	if (game->msg->steps)
-		free(game->msg->steps);
-	game->msg->steps = ft_strjoin("Steps: ", ft_itoa(game->steps)); // need to save the pointer
+	if (game->steps_str)
+		free(game->steps_str);
+	temp_1 = ft_strdup("Steps: ");
+	temp_2 = ft_itoa(game->steps);
+	game->steps_str = ft_strjoin(temp_1, temp_2);
+	free(temp_1);
+	free(temp_2);
 	redraw_items(game, 'S');
 }

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:24:38 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:40:03 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	init_game(t_state *game)
 	game->mlx = NULL;
 	game->img = NULL;
 	game->txt = NULL;
-	game->msg = NULL;
+	game->steps = 0;
+	game->steps_str = NULL;
 }
 
 int32_t	main(int argc, char **argv)

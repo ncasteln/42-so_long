@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:25:08 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:41:46 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	init_img(t_state *game)
 {
 	if (!init_textures(game))
 		return (0);
-	game->img = malloc (sizeof(t_img) * 7);
+	game->img = malloc (sizeof(t_img) * 8); // n of total images
 	if (!game->img)
 		return (0);
 	game->img->p = mlx_texture_to_image(game->mlx, game->txt->p);
@@ -39,11 +39,7 @@ static int	init_img(t_state *game)
 	game->img->ground = mlx_texture_to_image(game->mlx, game->txt->ground);
 	game->img->wall = mlx_texture_to_image(game->mlx, game->txt->wall);
 	game->img->n = mlx_texture_to_image(game->mlx, game->txt->n);
-
-	// init messages
-	game->msg = malloc (sizeof(t_img));
-	game->msg->steps = ft_itoa(0);
-	game->msg->steps_img = mlx_put_string(game->mlx, game->msg->steps, 0, 0);
+	game->img->steps_img = mlx_put_string(game->mlx, "Steps: 0", 0, 0);
 	return (1);
 }
 
@@ -66,8 +62,8 @@ void	reset_image(t_state *game, char c)
 	}
 	else if (c == 'S')
 	{
-		mlx_delete_image(game->mlx, game->msg->steps_img);
-		game->msg->steps_img = mlx_put_string(game->mlx, game->msg->steps, 16, 16);
+		mlx_delete_image(game->mlx, game->img->steps_img);
+		game->img->steps_img = mlx_put_string(game->mlx, game->steps_str, 16, 16);
 	}
 }
 
@@ -126,7 +122,7 @@ int	draw_map(void *param)
 		{
 			mlx_image_to_window(game->mlx, game->img->ground, x * 64, y * 64); // protect from -1 ???
 			images_to_window(game, y, x);
-			mlx_image_to_window(game->mlx, game->msg->steps_img, 16, 16); // protect from -1 ???
+			mlx_image_to_window(game->mlx, game->img->steps_img, 16, 16); // protect from -1 ???
 			x++;
 		}
 		y++;
