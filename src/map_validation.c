@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 09:44:20 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:48:03 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,21 +94,21 @@ static int	is_rectangle(t_list *lst)
 	return (1);
 }
 
-static int	is_valid_size(t_list *lst) // necessary function?
-{
-	int	total_char;
+// static int	is_valid_size(t_list *lst) // necessary function?
+// {
+// 	int	total_char;
 
-	total_char = 0;
-	while (lst->next)
-	{
-		total_char += (ft_strlen(lst->content) - 1);
-		lst = lst->next;
-	}
-	total_char += (ft_strlen(lst->content) - 1);
-	if (total_char < 15)
-		return (0);
-	return (1);
-}
+// 	total_char = 0;
+// 	while (lst->next)
+// 	{
+// 		total_char += (ft_strlen(lst->content) - 1);
+// 		lst = lst->next;
+// 	}
+// 	total_char += (ft_strlen(lst->content) - 1);
+// 	if (total_char < 15)
+// 		return (0);
+// 	return (1);
+// }
 
 /* This function check the line format and call other functions which
 check other validation requirements (n of items, kind of items etc.) */
@@ -140,7 +140,7 @@ int	is_valid_format(t_list *lst, t_state *game)
 		return (0);
 	if (!(is_rectangle(lst)))
 		return (0);
-	if (!(is_valid_size(lst)))
-		return (0);
+	// if (!(is_valid_size(lst)))
+	// 	return (0);
 	return (1);
 }

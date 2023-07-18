@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 10:28:59 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:31:45 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ static void	reset_exit(t_state *game, int next_py, int next_px)
 }
 
 /* Handles the move of pc to a colectible cell */
+static void pc_to_e(t_state *game, int next_py, int next_px)
+{
+	game->is_exit = 1;
+	swap_position(game, next_py, next_px);
+	if (game->is_end)
+		display_end(game);
+}
+
 static void pc_to_c(t_state *game, int next_py, int next_px)
 {
 	if (game->is_exit == 1)
@@ -53,7 +61,7 @@ static void pc_to_0(t_state *game, int next_py, int next_px)
 
 /* The function handle the moves to new position of the player char
 and accept the increment value of each coordinate */
-void	move_char(t_state *game, int y, int x)
+void	pc_move(t_state *game, int y, int x)
 {
 	int	next_px;
 	int	next_py;
@@ -61,16 +69,12 @@ void	move_char(t_state *game, int y, int x)
 	next_px = game->p.x + x;
 	next_py = game->p.y + y;
 	if (game->map[next_py][next_px] == 'E')
-	{
-		game->is_exit = 1;
-		swap_position(game, next_py, next_px);
-	}
+		pc_to_e(game, next_py, next_px);
 	else if (game->map[next_py][next_px] == 'C')
 		pc_to_c(game, next_py, next_px);
 	else if (game->map[next_py][next_px] == '0')
 		pc_to_0(game, next_py, next_px);
 	redraw_items(game, 'P');
-	state_print(game);
 }
 
 int	is_possible_move(t_state *game, int y, int x)
@@ -83,17 +87,11 @@ int	is_possible_move(t_state *game, int y, int x)
 	next_px = game->p.x + x;
 	cell = game->map[next_py][next_px];
 	if (cell == '0' || cell == 'C' || (cell == 'E' && game->c > 0))
-	{
-		game->steps += 1;
-		ft_printf("Steps: %d\n", game->steps);
-		return (1);
-	}
+		return (display_steps(game), 1);
 	else if (cell == 'E' && game->c == 0)
 	{
-		game->steps += 1;
-		ft_printf("Steps: %d\n", game->steps);
-		mlx_close_window(game->mlx);
-		return (0);
+		game->is_end = 1;
+		return (display_steps(game), 1);
 	}
 	return (0);
 }

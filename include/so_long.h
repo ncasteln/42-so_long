@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 10:28:26 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:23:45 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "libnc.h"
 # include "MLX42.h"
 # include "so_long_struct.h"
-
 # include <fcntl.h>	// open() and close() fd
 
 // -------------------------------- VALIDATION ---------------------------------
@@ -32,13 +31,17 @@ int		init_window(t_state *game);
 // ------------------------------ KEYS & EVENTS --------------------------------
 void	handle_key(mlx_key_data_t keydata, void *param);
 
+// ---------------------------------- MESSAGES ----------------------------------
+void	display_end(t_state *game);
+void	display_steps(t_state *game);
+
 // ------------------------------------- MAP -----------------------------------
 int		draw_map(void *param);
 void	redraw_items(t_state *game, char c);
 
 // ------------------------------------ MOVES -----------------------------------
 int		is_possible_move(t_state *game, int y, int x);
-void	move_char(t_state *game, int y, int x);
+void	pc_move(t_state *game, int y, int x);
 
 // ------------------------------- FREE UTILS ---------------------------------
 void	free_all(t_state *game);

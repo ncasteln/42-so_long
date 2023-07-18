@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 15:02:57 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:01:55 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_char
 // --------------------------------- MESSAGES -----------------------------------
 typedef struct s_msg
 {
-	char		*end;
 	char		*steps;
 	mlx_image_t	*end_img;
 	mlx_image_t	*steps_img;
@@ -63,10 +62,11 @@ typedef struct s_state
 	int				counter;
 	char			**map;
 	int				steps;
+	int				is_end;
 	struct	s_img	*img;
 	struct	s_txt	*txt;
-	mlx_t			*mlx;
 	struct	s_msg	*msg;
+	mlx_t			*mlx;
 }				t_state;
 
 #endif

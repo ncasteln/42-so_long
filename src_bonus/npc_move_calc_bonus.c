@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:20:43 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 15:05:52 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:56:52 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static void	find_move(t_state *game, t_char *next_npc)
 		next_npc->y = 1;
 	if (rn == 3)
 		next_npc->x = -1;
-	while (!is_possible_move(game, next_npc->y, next_npc->x, 'N')) // assumes that NPC can move also diagonal
+	while (!is_possible_move(game, next_npc->y, next_npc->x, 'N'))
 	{
+		next_npc->y = 0;
+		next_npc->x = 0;
 		rn = rand() % 4;
 		if (rn == 0)
 			next_npc->y = -1;
@@ -39,6 +41,7 @@ static void	find_move(t_state *game, t_char *next_npc)
 	}
 }
 
+
 static void	swap_position(t_state *game, int next_y, int next_x)
 {
 	game->map[game->n.y][game->n.x] = '0';
@@ -46,28 +49,21 @@ static void	swap_position(t_state *game, int next_y, int next_x)
 	game->n.x = next_x;
 	game->map[next_y][next_x] = 'N';
 }
+
 int	is_blocked(t_state *game)
 {
 	if (game->map[game->n.y - 1][game->n.x] == '0')
 		return (0);
-	if (game->map[game->n.y - 1][game->n.x + 1] == '0')
-		return (0);
 	if (game->map[game->n.y][game->n.x + 1] == '0')
-		return (0);
-	if (game->map[game->n.y + 1][game->n.x + 1] == '0')
 		return (0);
 	if (game->map[game->n.y + 1][game->n.x] == '0')
 		return (0);
-	if (game->map[game->n.y + 1][game->n.x - 1] == '0')
-		return (0);
 	if (game->map[game->n.y][game->n.x - 1] == '0')
-		return (0);
-	if (game->map[game->n.y - 1][game->n.x - 1] == '0')
 		return (0);
 	return (1);
 }
 
-void	move_npc(t_state *game)
+void	npc_move(t_state *game)
 {
 	t_char next_npc;
 

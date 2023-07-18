@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 10:49:41 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:03:03 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_state
 	int				c;
 	char			**map;
 	int				steps;
+	int				is_end;
+	mlx_image_t		*end_img;
 	struct	s_img	*img;
 	struct	s_txt	*txt;
 	mlx_t			*mlx;

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 14:41:24 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 09:14:05 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	reset_image(t_state *game, char c)
 	else if (c == 'S')
 	{
 		mlx_delete_image(game->mlx, game->msg->steps_img);
-		game->msg->steps_img = mlx_put_string(game->mlx, game->msg->steps, 0, 0);
+		game->msg->steps_img = mlx_put_string(game->mlx, game->msg->steps, 16, 16);
 	}
 }
 
@@ -126,7 +126,7 @@ int	draw_map(void *param)
 		{
 			mlx_image_to_window(game->mlx, game->img->ground, x * 64, y * 64); // protect from -1 ???
 			images_to_window(game, y, x);
-			mlx_image_to_window(game->mlx, game->msg->steps_img, 0, 0); // protect from -1 ???
+			mlx_image_to_window(game->mlx, game->msg->steps_img, 16, 16); // protect from -1 ???
 			x++;
 		}
 		y++;

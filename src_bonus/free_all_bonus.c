@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 14:38:26 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 08:29:30 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void	free_all(t_state *game)
 		free_textures(game->txt);
 	if (game->msg)
 		free_msg(game->mlx, game->msg);
-	// game ----> NULL ????
+	// game ----> NULL or free() ?
 }

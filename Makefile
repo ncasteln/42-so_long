@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/17 14:07:47 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/18 11:07:41 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC = main.c \
 	path_validation.c \
 	map_drawing.c \
 	free_all.c \
-	sl_error.c
+	sl_error.c \
+	display_messages.c
 SRC_BONUS = main_bonus.c \
 	window_settings_bonus.c \
 	state_print_bonus.c \

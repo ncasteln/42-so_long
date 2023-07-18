@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 15:00:04 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 08:42:54 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	redraw_items(t_state *game, char c);
 
 // ------------------------------------ MOVES -----------------------------------
 int		is_possible_move(t_state *game, int y, int x, char c);
-void	move_char(t_state *game, int y, int x);
-void	move_npc(t_state *game);
+void	pc_move(t_state *game, int y, int x);
+void	npc_move(t_state *game);
 
 // ------------------------------- FREE UTILS ---------------------------------
 void	free_all(t_state *game);

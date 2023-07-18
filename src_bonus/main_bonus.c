@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 15:04:45 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:31:38 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	init_game(t_state *game)
 	game->is_exit = 0;
 	game->c = 0;
 	game->counter = 0;
+	game->is_end = 0;
 	game->mlx = NULL;
 	game->img = NULL;
 	game->txt = NULL;
@@ -45,5 +46,5 @@ int32_t	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	free_all(&game);
 	mlx_terminate(game.mlx);
-	return (ft_putendl_fd("****** Game Over ******", 1), 0);
+	return (0);
 }

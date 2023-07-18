@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 16:54:36 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:02:38 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,7 @@ void	free_all(t_state *game)
 		free_images(game->mlx, game->img);
 	if (game->txt)
 		free_textures(game->txt);
+	if (game->end_img)
+		mlx_delete_image(game->mlx, game->end_img);
+	// free (game) ???
 }
