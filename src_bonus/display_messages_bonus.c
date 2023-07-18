@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_messages.c                                 :+:      :+:    :+:   */
+/*   display_messages_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:04:14 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 09:14:02 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:24:24 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	display_end(t_state *game)
 	int	mid_y;
 	int	mid_x;
 
-	mid_y = (nc_dptr_size_y(game->map) / 2) - 1;
-	mid_x = (nc_dptr_size_x(game->map) / 2) - 1;
+	mid_y = (game->mlx->height / 2) - 10;
+	mid_x = (game->mlx->width / 2) - ((ft_strlen("Game Over [press Esc]") * 10) / 2);
 	game->msg->end_img = mlx_put_string(game->mlx, "Game Over [press Esc]", mid_x * 64, mid_y * 64); // make central
 }
 

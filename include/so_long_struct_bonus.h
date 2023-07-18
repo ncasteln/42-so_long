@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 11:01:55 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:25:39 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_img
 	mlx_image_t	*c;
 	mlx_image_t	*wall;
 	mlx_image_t	*ground;
+	// mlx_image_t	*steps_str;
 }			t_img;
 
 // ---------------------------------- PLAYER -----------------------------------

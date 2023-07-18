@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/18 11:07:41 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/18 12:19:37 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ SRC_BONUS = main_bonus.c \
 	sl_error_bonus.c \
 	event_handling_bonus.c \
 	npc_move_calc_bonus.c \
-	display_messages.c
+	display_messages_bonus.c
 VPATH = ./src/:./src_bonus/
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
