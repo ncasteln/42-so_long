@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 10:50:41 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:50:15 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	init_textures(t_state *game)
 	game->txt = malloc (sizeof(mlx_texture_t) * 5);
 	if (!game->txt)
 		return (0);
-	game->txt->p = mlx_load_png("./textures/player_0.png");
+	game->txt->p = mlx_load_png("./textures/player_r.png");
 	game->txt->e = mlx_load_png("./textures/exit.png");
 	game->txt->c = mlx_load_png("./textures/coll.png");
 	game->txt->ground = mlx_load_png("./textures/ground.png");

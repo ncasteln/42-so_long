@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:39:28 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:01:13 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 // -------------------------------- TEXTURES -----------------------------------
 typedef struct	s_txt
 {
-	mlx_texture_t	*p;
+	mlx_texture_t	*p_r;
+	mlx_texture_t	*p_l;
 	mlx_texture_t	*n;
 	mlx_texture_t	*e;
 	mlx_texture_t	*c;
@@ -49,6 +50,7 @@ typedef struct s_char
 typedef struct s_state
 {
 	struct s_char	p;
+	char			p_last;
 	struct s_char	n;
 	int				e;
 	int				is_exit;

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:41:46 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:04:10 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static int	init_textures(t_state *game)
 {
-	game->txt = malloc (sizeof(mlx_texture_t) * 6);
+	game->txt = malloc (sizeof(mlx_texture_t) * 7);
 	if (!game->txt)
 		return (0);
-	game->txt->p = mlx_load_png("./textures/player_0.png");
+	game->txt->p_r = mlx_load_png("./textures/player_r.png");
+	game->txt->p_l = mlx_load_png("./textures/player_l.png");
 	game->txt->e = mlx_load_png("./textures/exit.png");
 	game->txt->c = mlx_load_png("./textures/coll.png");
 	game->txt->ground = mlx_load_png("./textures/ground.png");
@@ -30,10 +31,10 @@ static int	init_img(t_state *game)
 {
 	if (!init_textures(game))
 		return (0);
-	game->img = malloc (sizeof(t_img) * 8); // n of total images
+	game->img = malloc (sizeof(t_img) * 8); // n of total images + 1 for end
 	if (!game->img)
 		return (0);
-	game->img->p = mlx_texture_to_image(game->mlx, game->txt->p);
+	game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_r);
 	game->img->e = mlx_texture_to_image(game->mlx, game->txt->e);
 	game->img->c = mlx_texture_to_image(game->mlx, game->txt->c);
 	game->img->ground = mlx_texture_to_image(game->mlx, game->txt->ground);
@@ -53,7 +54,10 @@ void	reset_image(t_state *game, char c)
 	else if (c == 'P')
 	{
 		mlx_delete_image(game->mlx, game->img->p);
-		game->img->p = mlx_texture_to_image(game->mlx, game->txt->p);
+		if (game->p_last == 'r')
+			game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_r); // conditional for animation
+		else if (game->p_last == 'l')
+			game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_l); // conditional for animation
 	}
 	else if (c == 'N')
 	{
