@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/18 14:01:31 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/18 15:26:17 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ MLX42_DIR = ./lib/MLX42/
 GLFW = -lglfw -L"/goinfre/ncasteln/.brew/Cellar/glfw/3.3.8/lib"
 
 # ------------------------------------ SRCS ------------------------------------
+VPATH = ./src/:./src_bonus/
+OBJS_DIR = ./objs/
+# ------------------------------------ MAND ------------------------------------
 SRC = main.c \
 	window_settings.c \
 	state_print.c \
@@ -42,6 +45,9 @@ SRC = main.c \
 	map_drawing.c \
 	free_all.c \
 	display_messages.c
+OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
+
+# ------------------------------- SRCS BONUS ------------------------------------
 SRC_BONUS = main_bonus.c \
 	window_settings_bonus.c \
 	state_print_bonus.c \
@@ -56,9 +62,6 @@ SRC_BONUS = main_bonus.c \
 	event_handling_bonus.c \
 	npc_move_calc_bonus.c \
 	display_messages_bonus.c
-VPATH = ./src/:./src_bonus/
-OBJS_DIR = ./objs/
-OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 OBJS_BONUS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 
 # ------------------------------------ INCLUDES --------------------------------
@@ -79,7 +82,7 @@ $(NAME): $(MYLIB) $(MLX42) $(OBJS)
 	@$(CC) $(CFLAGS) \
 	$(OBJS) $(MYLIB) $(MLX42) \
 	$(GLFW) \
-	-o $@
+	-o $(NAME)
 	@echo "$(GREEN)	$@ successfully compiled!"
 
 $(NAME)_bonus: $(MYLIB) $(MLX42) $(OBJS_BONUS)
@@ -87,7 +90,7 @@ $(NAME)_bonus: $(MYLIB) $(MLX42) $(OBJS_BONUS)
 	@$(CC) $(CFLAGS) \
 	$(OBJS_BONUS) $(MYLIB) $(MLX42) \
 	$(GLFW) \
-	-o $@
+	-o $(NAME)
 	@echo "$(GREEN)	$@ successfully compiled!"
 
 $(MYLIB):
