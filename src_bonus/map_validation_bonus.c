@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 11:10:05 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:22:53 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	is_valid_first_last_line(const char *s)
 	return (0);
 }
 
+/* Returns (1) if there is already the element, otherwise set its coordinates */
 static int	is_duplicate(char c, t_state *game, int y, int x)
 {
 	if (c == 'P')
@@ -37,8 +38,14 @@ static int	is_duplicate(char c, t_state *game, int y, int x)
 	{
 		if (game->e)
 			return (1);
-		else
-			game->e += 1;
+		game->e += 1;
+	}
+	if (c == 'N')
+	{
+		if (game->n.x || game->n.y)
+			return (1);
+		game->n.y = y;
+		game->n.x = x;
 	}
 	return (0);
 }
@@ -64,16 +71,13 @@ static int	is_valid_mid_line(const char *curr_line, t_state *game, int y)
 			if (!is_valid_item(curr_line[x]))
 				return (0);
 			if (curr_line[x] == 'P' && is_duplicate('P', game, y, x))
-					return (0);
+				return (0);
 			if (curr_line[x] == 'E' && is_duplicate('E', game, y, x))
-					return (0);
+				return (0);
 			if (curr_line[x] == 'C')
 				game->c += 1;
-			if (curr_line[x] == 'N') // assumes that there is only one enemy
-			{
-				game->n.y = y;
-				game->n.x = x;
-			}
+			if (curr_line[x] == 'N' && is_duplicate('N', game, y, x))
+				return (0);
 		}
 		if ((x == ft_strlen(curr_line) - 2) && (curr_line[x] != '1'))
 			return (0);

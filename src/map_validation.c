@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 11:48:03 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:22:48 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	is_valid_first_last_line(const char *s)
 	return (0);
 }
 
+/* Returns (1) if there is already the element, otherwise set its coordinates */
 static int	is_duplicate(char c, t_state *game, int y, int x)
 {
 	if (c == 'P')
@@ -37,8 +38,7 @@ static int	is_duplicate(char c, t_state *game, int y, int x)
 	{
 		if (game->e)
 			return (1);
-		else
-			game->e += 1;
+		game->e += 1;
 	}
 	return (0);
 }

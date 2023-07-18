@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 14:01:43 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:53:29 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include "so_long_struct_bonus.h"
 # include <fcntl.h>	// open() and close() fd
 # include <math.h>	// rand() func
+
+# define WIDTH_LIMIT 5120 / 2
+# define HEIGHT_LIMIT 2880 / 2
 
 // -------------------------------- VALIDATION ---------------------------------
 int		validate(int argc, char **argv, t_state *game);

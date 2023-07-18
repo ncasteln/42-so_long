@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 14:00:00 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:52:56 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include "MLX42.h"
 # include "so_long_struct.h"
 # include <fcntl.h>	// open() and close() fd
+
+# define WIDTH_LIMIT 5120 / 2
+# define HEIGHT_LIMIT 2880 / 2
 
 // -------------------------------- VALIDATION ---------------------------------
 int		validate(int argc, char **argv, t_state *game);

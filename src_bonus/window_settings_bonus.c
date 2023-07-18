@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 10:54:55 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:54:50 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	init_window(t_state *game)
 {
-	int	width;
-	int	height;
+	int32_t	width;
+	int32_t	height;
 	int	size_x;
 	int	size_y;
 
 	size_x = nc_dptr_size_x(game->map);
 	size_y = nc_dptr_size_y(game->map);
-	if (size_x > 40 || size_y > 25) // ------------------------------------  set new limit ?????
-		return (0);
 	width = size_x * 64;
 	height = size_y * 64;
+	if (width > WIDTH_LIMIT || height > HEIGHT_LIMIT)
+		return (0);
 	game->mlx = mlx_init(width, height, "so_long", false);
 	if (!game->mlx)
 		return (0);
