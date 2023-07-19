@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 16:58:49 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:05:57 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int	draw_map(void *param)
 		{
 			mlx_image_to_window(game->mlx, game->img->ground, x * 64, y * 64); // protect from -1 ???
 			images_to_window(game, y, x);
-			mlx_image_to_window(game->mlx, game->img->steps_img, 16, 16); // protect from -1 ??? ---- remove ???
+			// mlx_image_to_window(game->mlx, game->img->steps_img, 16, 16); // protect from -1 ??? ---- remove ???
 			x++;
 		}
 		y++;
