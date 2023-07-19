@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_settings.c                                  :+:      :+:    :+:   */
+/*   init_window_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 09:28:55 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:44:02 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	init_window(t_state *game)
 {
@@ -28,5 +28,5 @@ int	init_window(t_state *game)
 	game->mlx = mlx_init(width, height, "so_long", false);
 	if (!game->mlx)
 		return (err_print(game, 9), 9);
-	return (0);
+	return (1);
 }

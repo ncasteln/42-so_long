@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 09:28:07 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:41:10 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,5 @@ int	is_valid_format(t_list *lst, t_state *game)
 		return (ft_lstclear(&lst, lst_delnode), err_print(game, 4), 4);
 	if (!is_rectangle(lst))
 		return (ft_lstclear(&lst, lst_delnode), err_print(game, 5), 5);
-	return (0);
+	return (1);
 }

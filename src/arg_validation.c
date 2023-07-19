@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:02:21 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 09:28:33 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:42:19 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int	validate(int argc, char **argv, t_state *game)
 	if (!game->map)
 		return (err_print(game, 6), 6);
 	is_valid_path(game);
-	return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 13:04:10 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:45:26 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	draw_map(void *param)
 
 	game = (t_state *) param;
 	if (!init_img(game))
-		return (0);
+		return (err_print(game, 10), 10);
 	y = 0;
 	while (y < nc_dptr_size_y(game->map))
 	{

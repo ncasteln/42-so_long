@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/19 07:56:43 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/19 09:44:27 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ VPATH = ./src/:./src_bonus/
 OBJS_DIR = ./objs/
 # ------------------------------------------------------------------------- MAND
 SRC = main.c \
-	window_settings.c \
+	init_window.c \
 	state_print.c \
 	lst_to_dptr.c \
 	key_handling.c \
@@ -50,7 +50,7 @@ OBJS_FLAG = $(OBJS_DIR).mand_flag
 
 # ------------------------------------------------------------------------ BONUS
 SRC_BONUS = main_bonus.c \
-	window_settings_bonus.c \
+	init_window_bonus.c \
 	state_print_bonus.c \
 	lst_to_dptr_bonus.c \
 	key_handling_bonus.c \
