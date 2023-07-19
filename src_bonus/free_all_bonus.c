@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:54:39 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:20:22 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ static void	free_textures(t_txt *txt)
 {
 	mlx_delete_texture(txt->p_r);
 	mlx_delete_texture(txt->p_l);
+	mlx_delete_texture(txt->pe_r);
+	mlx_delete_texture(txt->pe_l);
+	mlx_delete_texture(txt->e_0);
+	mlx_delete_texture(txt->e_1);
 	mlx_delete_texture(txt->c);
-	mlx_delete_texture(txt->e);
 	mlx_delete_texture(txt->n);
 	mlx_delete_texture(txt->ground);
 	mlx_delete_texture(txt->wall);

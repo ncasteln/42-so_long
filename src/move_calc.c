@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 10:00:50 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:34:19 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ static void pc_to_e(t_state *game, int next_py, int next_px)
 	game->is_exit = 1;
 	swap_position(game, next_py, next_px);
 	if (game->is_end)
+	{
+		game->is_exit = 0;
 		display_end(game);
+	}
 }
 
 static void pc_to_c(t_state *game, int next_py, int next_px)
@@ -49,6 +52,8 @@ static void pc_to_c(t_state *game, int next_py, int next_px)
 	game->c -= 1;
 	swap_position(game, next_py, next_px);
 	redraw_items(game, 'C');
+	if (game->c == 0)
+		redraw_items(game, 'E');
 }
 
 static void pc_to_0(t_state *game, int next_py, int next_px)

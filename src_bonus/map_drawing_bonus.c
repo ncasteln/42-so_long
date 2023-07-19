@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 09:45:26 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:39:48 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 static int	init_textures(t_state *game)
 {
-	game->txt = malloc (sizeof(mlx_texture_t) * 7);
+	game->txt = malloc (sizeof(mlx_texture_t) * 10);
 	if (!game->txt)
 		return (0);
 	game->txt->p_r = mlx_load_png("./textures/player_r.png");
 	game->txt->p_l = mlx_load_png("./textures/player_l.png");
-	game->txt->e = mlx_load_png("./textures/exit.png");
+	game->txt->pe_r = mlx_load_png("./textures/player_exit_r.png");
+	game->txt->pe_l = mlx_load_png("./textures/player_exit_l.png");
+	game->txt->e_0 = mlx_load_png("./textures/exit_0.png");
+	game->txt->e_1 = mlx_load_png("./textures/exit_1.png");
 	game->txt->c = mlx_load_png("./textures/coll.png");
 	game->txt->ground = mlx_load_png("./textures/ground.png");
 	game->txt->wall = mlx_load_png("./textures/wall.png");
@@ -35,7 +38,7 @@ static int	init_img(t_state *game)
 	if (!game->img)
 		return (0);
 	game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_r);
-	game->img->e = mlx_texture_to_image(game->mlx, game->txt->e);
+	game->img->e = mlx_texture_to_image(game->mlx, game->txt->e_0);
 	game->img->c = mlx_texture_to_image(game->mlx, game->txt->c);
 	game->img->ground = mlx_texture_to_image(game->mlx, game->txt->ground);
 	game->img->wall = mlx_texture_to_image(game->mlx, game->txt->wall);
@@ -44,7 +47,31 @@ static int	init_img(t_state *game)
 	return (1);
 }
 
-void	reset_image(t_state *game, char c)
+static void	reset_p_image(t_state *game)
+{
+	mlx_delete_image(game->mlx, game->img->p);
+	if (!game->is_end)
+	{
+		if (game->p_last == 'r')
+		{
+			if (game->is_exit)
+				game->img->p = mlx_texture_to_image(game->mlx, game->txt->pe_r);
+			else
+				game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_r);
+		}
+		else if (game->p_last == 'l')
+		{
+			if (game->is_exit)
+				game->img->p = mlx_texture_to_image(game->mlx, game->txt->pe_l);
+			else
+				game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_l);
+		}
+	}
+	else
+		game->img->p = mlx_texture_to_image(game->mlx, game->txt->e_1);
+}
+
+static void	reset_image(t_state *game, char c)
 {
 	if (c == 'C')
 	{
@@ -52,13 +79,7 @@ void	reset_image(t_state *game, char c)
 		game->img->c = mlx_texture_to_image(game->mlx, game->txt->c);
 	}
 	else if (c == 'P')
-	{
-		mlx_delete_image(game->mlx, game->img->p);
-		if (game->p_last == 'r')
-			game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_r); // conditional for animation
-		else if (game->p_last == 'l')
-			game->img->p = mlx_texture_to_image(game->mlx, game->txt->p_l); // conditional for animation
-	}
+		reset_p_image(game);
 	else if (c == 'N')
 	{
 		mlx_delete_image(game->mlx, game->img->n);
@@ -69,29 +90,10 @@ void	reset_image(t_state *game, char c)
 		mlx_delete_image(game->mlx, game->img->steps_img);
 		game->img->steps_img = mlx_put_string(game->mlx, game->steps_str, 16, 16);
 	}
-}
-
-void	redraw_items(t_state *game, char c)
-{
-	int	y;
-	int	x;
-
-	reset_image(game, c);
-	y = 0;
-	while (y < nc_dptr_size_y(game->map))
+	else if (c == 'E')
 	{
-		x = 0;
-		while (x < nc_dptr_size_x(game->map))
-		{
-			if (game->map[y][x] == 'C')
-				mlx_image_to_window(game->mlx, game->img->c, x * 64, y * 64);
-			else if (game->map[y][x] == 'P')
-				mlx_image_to_window(game->mlx, game->img->p, x * 64, y * 64);
-			else if (game->map[y][x] == 'N')
-				mlx_image_to_window(game->mlx, game->img->n, x * 64, y * 64);
-			x++;
-		}
-		y++;
+		mlx_delete_image(game->mlx, game->img->e);
+		game->img->e = mlx_texture_to_image(game->mlx, game->txt->e_1);
 	}
 }
 
@@ -108,6 +110,26 @@ static void	images_to_window(t_state *game, int y, int x)
 	if (game->map[y][x] == 'N')
 		mlx_image_to_window(game->mlx, game->img->n, x * 64, y * 64);
 }
+
+void	redraw_items(t_state *game, char c)
+{
+	int	y;
+	int	x;
+
+	reset_image(game, c);
+	y = 0;
+	while (y < nc_dptr_size_y(game->map))
+	{
+		x = 0;
+		while (x < nc_dptr_size_x(game->map))
+		{
+			images_to_window(game, y, x);
+			x++;
+		}
+		y++;
+	}
+}
+
 
 int	draw_map(void *param)
 {
