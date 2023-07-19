@@ -6,34 +6,41 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:07:27 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 08:07:52 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:35:19 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// int	err_print(int err)
-// {
-// 	ft_putendl_fd("Error", 2);
-// 	if (err == 1)
-// 		ft_putendl_fd("Invalid map", 2);
-// 	if (err == 2)
-// 		ft_putendl_fd("MLX failed", 2);
-// 	if (err == 3)
-// 		ft_putendl_fd("Map building failed", 2);
-// 	return (err);
-// }
+char	*get_err_str(int err_code)
+{
+	if (err_code == 1)
+		return ("Invalid arguments");
+	if (err_code == 2)
+		return ("Read / lst creation failed");
+	if (err_code == 3)
+		return ("Invalid line format");
+	if (err_code == 4)
+		return ("Invalid number of items");
+	if (err_code == 5)
+		return ("Map is not rectangular");
+	if (err_code == 6)
+		return ("Map creation failed");
+	if (err_code == 7)
+		return ("Invalid path");
+	if (err_code == 8)
+		return ("Map too big");
+	if (err_code == 10)
+		return ("Failed init texture / images");
+	return ("Unknow error");
+}
 
-int	err_print(int err)
+void	err_print(t_state *game, int err_code)
 {
 	ft_putendl_fd("Error", 2);
-	if (err == 1)
-		ft_putendl_fd("Invalid map", 2);
-	if (err == 2)
-		ft_putendl_fd("MLX failed", 2);
-	if (err == 3)
-		ft_putendl_fd("Map building failed", 2);
-	return (err);
+	ft_putendl_fd(get_err_str(err_code), 2); // ------------- to fd 2 ???
+	free_all(game); // mlx terminate and close window ??? --- needed ????
+	exit(err_code);
 }
 
 void	display_end(t_state *game)

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 09:45:54 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:28:31 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	is_valid_path(t_state *game)
 	items[1] = game->e;
 	map_cpy = nc_dptr_deepcpy(game->map);
 	if (!map_cpy)
-		return (0);
+		return (err_print(game, 6), 6);
 	check_neighbors(map_cpy, game->p.y, game->p.x, items);
 	if (items[0] != 0 || items[1] != 0)
-		return (nc_dptr_free(map_cpy), 0);
-	return (nc_dptr_free(map_cpy), 1);
+		return (nc_dptr_free(map_cpy), err_print(game, 7), 7);
+	return (nc_dptr_free(map_cpy), 0);
 }

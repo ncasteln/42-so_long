@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 08:05:52 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:27:27 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	pc_move(t_state *game, int y, int x);
 // ----------------------------------------------------------------------- UTILS
 void	free_all(t_state *game);
 void	lst_delnode(void *line);
-int		err_print(int err);
 void	state_print(t_state *game);
 void	lst_print(t_list *lst);
 char	**lst_to_dptr(t_list *lst, int y);
+void	err_print(t_state *game, int err_code);
 
 #endif

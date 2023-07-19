@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 14:55:22 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:28:07 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static int	is_valid_mid_line(const char *curr_line, t_state *game, int y)
 			if (!is_valid_item(curr_line[x]))
 				return (0);
 			if (curr_line[x] == 'P' && is_duplicate('P', game, y, x))
-					return (0);
+				return (0);
 			if (curr_line[x] == 'E' && is_duplicate('E', game, y, x))
-					return (0);
+				return (0);
 			if (curr_line[x] == 'C')
 				game->c += 1;
 		}
@@ -101,28 +101,27 @@ static int	is_valid_line(t_state *game, t_list *lst)
 	int	y;
 
 	if (!(is_valid_first_last_line(lst->content)))
-		return (0);
+		return (ft_lstclear(&lst, lst_delnode), err_print(game, 3), 3);
 	lst = lst->next;
 	y = 0;
 	while (lst->next)
 	{
 		y++;
 		if (!is_valid_mid_line(lst->content, game, y))
-			return (0);
+			return (ft_lstclear(&lst, lst_delnode), err_print(game, 3), 3);
 		lst = lst->next;
 	}
 	if (!(is_valid_first_last_line(lst->content)))
-		return (0);
-	return (1);
+		return (ft_lstclear(&lst, lst_delnode), err_print(game, 3), 3);
+	return (0);
 }
 
 int	is_valid_format(t_list *lst, t_state *game)
 {
-	if (!is_valid_line(game, lst))
-		return (0);
+	is_valid_line(game, lst);
 	if (!(game->p.x) || !(game->e) || !(game->c))
-		return (0);
-	if (!(is_rectangle(lst)))
-		return (0);
-	return (1);
+		return (ft_lstclear(&lst, lst_delnode), err_print(game, 4), 4);
+	if (!is_rectangle(lst))
+		return (ft_lstclear(&lst, lst_delnode), err_print(game, 5), 5);
+	return (0);
 }
