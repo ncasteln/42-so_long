@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/18 16:08:01 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/19 07:56:43 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ all: $(NAME)
 
 bonus: $(NAME)
 
-$(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
+$(NAME): $(MYLIB) $(MLX42) $(OBJS)
 	@echo "$(NC)Compiling $@ executable file..."
 	@$(CC) $(CFLAGS) \
 	$(OBJS) $(MYLIB) $(MLX42) \
@@ -112,12 +112,12 @@ $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(OBJS_DIR)
 	@cc $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-$(OBJS_FLAG):
-	@rm -rf $(OBJS_DIR).mand_flag
-	@rm -rf $(OBJS_DIR).bonus_flag
-	@mkdir -p $(OBJS_DIR)
-	@touch $(OBJS_FLAG)
-	@echo "$(YELLOW)	Created [objs_flag] to not relink..."
+# $(OBJS_FLAG):
+# 	@rm -rf $(OBJS_DIR).mand_flag
+# 	@rm -rf $(OBJS_DIR).bonus_flag
+# 	@mkdir -p $(OBJS_DIR)
+# 	@touch $(OBJS_FLAG)
+# 	@echo "$(YELLOW)	Created [objs_flag] to not relink..."
 
 clean:
 	@echo "$(NC)Removing objs..."
