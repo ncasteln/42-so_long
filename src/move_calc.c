@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 13:34:19 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:14:55 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ static void pc_to_e(t_state *game, int next_py, int next_px)
 {
 	game->is_exit = 1;
 	swap_position(game, next_py, next_px);
-	if (game->is_end)
-	{
-		game->is_exit = 0;
-		display_end(game);
-	}
+	if (!game->c)
+		game->is_end = 1;
 }
 
 static void pc_to_c(t_state *game, int next_py, int next_px)
@@ -94,10 +91,7 @@ int	is_possible_move(t_state *game, int y, int x)
 	if (cell == '0' || cell == 'C' || (cell == 'E' && game->c > 0))
 		return (display_steps(game), 1);
 	else if (cell == 'E' && game->c == 0)
-	{
-		game->is_end = 1;
 		return (display_steps(game), 1);
-	}
 	return (0);
 }
 

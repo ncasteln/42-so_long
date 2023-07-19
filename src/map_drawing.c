@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:08:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 13:44:07 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:20:30 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ void	reset_image(t_state *game, char c)
 	else if (c == 'P')
 	{
 		mlx_delete_image(game->mlx, game->img->p);
-		if (game->is_exit)
-			game->img->p = mlx_texture_to_image(game->mlx, game->txt->pe_r);
-		else if (!game->is_end)
-			game->img->p = mlx_texture_to_image(game->mlx, game->txt->p);
-		else if (game->is_end)
+		if (game->is_end)
 			game->img->p = mlx_texture_to_image(game->mlx, game->txt->e_1);
+		else
+		{
+			if (game->is_exit)
+				game->img->p = mlx_texture_to_image(game->mlx, game->txt->pe_r);
+			else
+				game->img->p = mlx_texture_to_image(game->mlx, game->txt->p);
+		}
 	}
 	else if (c == 'E')
 	{
@@ -88,6 +91,8 @@ void	redraw_items(t_state *game, char c)
 		}
 		y++;
 	}
+	if (game->is_end)
+		display_end(game);
 }
 
 static void	images_to_window(t_state *game, int y, int x)

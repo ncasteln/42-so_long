@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/19 13:10:46 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/19 15:45:45 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,4 +134,4 @@ YELLOW = \033[0;33m
 RED = \033[0;31m
 NC = \033[0m
 
-.PHONY: all, clean, fclean, re
+.PHONY: all clean fclean re bonus

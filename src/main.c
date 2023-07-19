@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 12:47:12 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:14:42 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int32_t	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	// free_all(&game); // --- --- --- -- needed ???
 	// mlx_terminate(game.mlx);
-	// system("leaks so_long");
+	system("leaks so_long");
 	return (0);
 }

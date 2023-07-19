@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:14:44 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/18 12:47:35 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:04:54 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,4 @@ void	handle_event(void *param)
 		if (game->counter % 33 == 0)
 			npc_move(game);
 	}
-	else
-		display_end(game);
 }

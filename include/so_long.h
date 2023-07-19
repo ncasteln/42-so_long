@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 09:27:27 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:03:29 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		init_window(t_state *game);
 
 // --------------------------------------------------------------- KEYS & EVENTS
 void	handle_key(mlx_key_data_t keydata, void *param);
+void	handle_event(void *param);
 
 // -------------------------------------------------------------------- MESSAGES
 void	display_end(t_state *game);
