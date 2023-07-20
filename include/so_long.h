@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 15:03:29 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 08:51:19 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "so_long_struct.h"
 # include <fcntl.h>	// open() and close() fd
 
+// ----------------------------------------------------------------- SCREEN SIZE
 # ifndef WIDTH_LIMIT
 #  define WIDTH_LIMIT 2560
 # endif
@@ -27,10 +28,26 @@
 #  define HEIGHT_LIMIT 1440
 # endif
 
+// ---------------------------------------------------------------------- ERRORS
+enum e_err_code
+{
+	INV_ARG,
+	READ_LST_FAIL,
+	INV_FORMAT,
+	INV_ITEM,
+	DOUB_ITEM,
+	MISS_ITEM,
+	INV_MAPSHAPE,
+	MAP_FAIL,
+	INV_PATH,
+	INV_MAPSIZE,
+	FAIL_IMGTEXT
+};
+
 // ------------------------------------------------------------------ VALIDATION
-int		validate(int argc, char **argv, t_state *game);
-int		is_valid_format(t_list *lst, t_state *game);
-int		is_valid_path(t_state *game);
+void	validate(int argc, char **argv, t_state *game);
+void	is_valid_format(t_list *lst, t_state *game);
+void	is_valid_path(t_state *game);
 
 // ---------------------------------------------------------------------- WINDOW
 int		init_window(t_state *game);
