@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 12:27:54 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:34:42 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	free_all(t_state *game)
 {
 	if (game->map)
 		nc_dptr_free(game->map);
+	// ft_bzero(&game, sizeof(t_state));
 }

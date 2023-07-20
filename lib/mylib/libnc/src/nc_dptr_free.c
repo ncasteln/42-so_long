@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:55:40 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 12:52:33 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:27:07 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	nc_dptr_free(char **p)
 	int	i;
 
 	i = 0;
-	while (p[i])
+	if (p[i])
 	{
-		free(p[i]);
-		i++;
+		while (p[i])
+		{
+			free(p[i]);
+			i++;
+		}
+		free(p);
 	}
-	free(p);
 }

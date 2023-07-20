@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 13:06:55 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 14:22:32 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,38 @@ typedef struct s_char
 }				t_char;
 
 // ------------------------------------------------------------------ GAME STATE
+// typedef struct s_state
+// {
+// 	struct s_char	p;
+// 	int				is_exit;
+// 	int				e;
+// 	int				c;
+// 	char			**map;
+// 	int				steps;
+// 	int				is_end;
+// 	mlx_image_t		*end_img;
+// 	struct	s_img	*img;
+// 	struct	s_txt	*txt;
+// 	mlx_t			*mlx;
+// }				t_state;
+
 typedef struct s_state
 {
 	struct s_char	p;
 	int				is_exit;
 	int				e;
 	int				c;
-	t_list			*lst;
 	char			**map;
 	int				steps;
 	int				is_end;
+}				t_state;
+
+typedef struct s_graphic
+{
 	mlx_image_t		*end_img;
 	struct	s_img	*img;
 	struct	s_txt	*txt;
 	mlx_t			*mlx;
-}				t_state;
+}				t_graphic;
 
 #endif

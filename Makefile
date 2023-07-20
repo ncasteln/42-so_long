@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/20 12:51:34 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/20 14:20:42 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,11 +102,6 @@ INCLUDE = -I ./include/ \
 	-I ./lib/mylib/get_next_line/ \
 	-I ./lib/mylib/libnc/include/ \
 	-I ./lib/MLX42/include/MLX42/
-INCLUDE_VALID = -I ./src_valid/ \
-	-I ./lib/mylib/libft/include/ \
-	-I ./lib/mylib/ft_printf/include/ \
-	-I ./lib/mylib/get_next_line/ \
-	-I ./lib/mylib/libnc/include/
 
 # *******************************************************************************
 # *																			RULES
@@ -125,10 +120,18 @@ $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
 	-o $(NAME)
 	@echo "$(GREEN)	$@ successfully compiled!"
 
+# $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
+# 	@echo "$(NC)Compiling $@ executable file..."
+# 	@$(CC) $(CFLAGS) \
+# 	$(OBJS) $(MYLIB) $(MLX42) \
+# 	-lglfw -L$(GLFW) \
+# 	-o $(NAME)
+# 	@echo "$(GREEN)	$@ successfully compiled!"
+
 $(NAME)_valid: $(MYLIB) $(OBJS) $(OBJS_FLAG)
 	@echo "$(NC)Compiling $@ executable file..."
 	@$(CC) $(CFLAGS) \
-	$(OBJS) $(MYLIB) \s
+	$(OBJS) $(MYLIB) \
 	-o $(NAME)_valid
 	@echo "$(GREEN)	$@ successfully compiled!"
 
