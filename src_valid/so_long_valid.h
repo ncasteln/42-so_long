@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_valid.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 13:06:39 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/20 12:05:26 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/20 12:34:12 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_VALID_H
+# define SO_LONG_VALID_H
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include "libnc.h"
-# include "MLX42.h"
-# include "so_long_struct.h"
 # include <fcntl.h>	// open() and close() fd
-
-// ----------------------------------------------------------------- SCREEN SIZE
-# ifndef WIDTH_LIMIT
-#  define WIDTH_LIMIT 2560
-# endif
-# ifndef HEIGHT_LIMIT
-#  define HEIGHT_LIMIT 1440
-# endif
 
 // ---------------------------------------------------------------------- ERRORS
 enum e_err_code
@@ -46,6 +36,25 @@ enum e_err_code
 	MLX_IMGWIN_FAIL
 };
 
+// ---------------------------------------------------------------------- PLAYER
+typedef struct s_char
+{
+	int			y;
+	int			x;
+}				t_char;
+
+// ------------------------------------------------------------------ GAME STATE
+typedef struct s_state
+{
+	struct s_char	p;
+	int				is_exit;
+	int				e;
+	int				c;
+	char			**map;
+	int				steps;
+	int				is_end;
+}				t_state;
+
 // ------------------------------------------------------------------ VALIDATION
 void	validate(int argc, char **argv, t_state *game);
 void	is_valid_format(t_list *lst, t_state *game);
@@ -55,7 +64,6 @@ void	is_valid_path(t_state *game);
 void	init_window(t_state *game);
 
 // --------------------------------------------------------------- KEYS & EVENTS
-void	handle_key(mlx_key_data_t keydata, void *param);
 void	handle_event(void *param);
 
 // -------------------------------------------------------------------- MESSAGES
@@ -65,10 +73,6 @@ void	display_steps(t_state *game);
 // ------------------------------------------------------------------------- MAP
 int		draw_map(void *param);
 void	redraw_items(t_state *game, char c);
-
-// ----------------------------------------------------------------------- MOVES
-int		is_possible_move(t_state *game, int y, int x);
-void	pc_move(t_state *game, int y, int x);
 
 // ----------------------------------------------------------------------- UTILS
 void	free_all(t_state *game);

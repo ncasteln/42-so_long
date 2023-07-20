@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_validation.c                                  :+:      :+:    :+:   */
+/*   path_validation_valid.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 10:27:11 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:29:37 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_valid.h"
 
 /* This function make two things: counts the C and E elements, and returns
 when it finds a wall, the player position, an already found position or

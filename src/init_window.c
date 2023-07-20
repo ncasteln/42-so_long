@@ -6,13 +6,13 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 09:44:46 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 10:49:18 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	init_window(t_state *game)
+void	init_window(t_state *game)
 {
 	int32_t	width;
 	int32_t	height;
@@ -24,9 +24,8 @@ int	init_window(t_state *game)
 	width = size_x * 64;
 	height = size_y * 64;
 	if (width > WIDTH_LIMIT || height > HEIGHT_LIMIT)
-		return (err_print(game, 8), 8);
+		return (err_print(game, INV_MAPSIZE));
 	game->mlx = mlx_init(width, height, "so_long", false);
 	if (!game->mlx)
-		return (err_print(game, 9), 9);
-	return (1);
+		return (err_print(game, MLX_FAIL));
 }

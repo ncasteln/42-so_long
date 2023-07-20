@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 12:58:18 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:06:55 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_state
 	int				is_exit;
 	int				e;
 	int				c;
+	t_list			*lst;
 	char			**map;
 	int				steps;
 	int				is_end;

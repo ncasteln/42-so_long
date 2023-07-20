@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_validation.c                                   :+:      :+:    :+:   */
+/*   arg_validation_valid.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:02:21 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 13:08:23 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:43:38 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_valid.h"
 
 static t_list	*lines_to_lst(const char *path)
 {

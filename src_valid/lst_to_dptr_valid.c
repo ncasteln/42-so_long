@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_to_dptr.c                                      :+:      :+:    :+:   */
+/*   lst_to_dptr_valid.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:15:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 12:26:21 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:28:40 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_valid.h"
 
 /* Convert a lst whose content is a char *s to a dptr who points to each str */
 char	**lst_to_dptr(t_list *lst, int y)

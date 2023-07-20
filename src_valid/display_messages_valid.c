@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_messages.c                                 :+:      :+:    :+:   */
+/*   display_messages_valid.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:07:27 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 10:51:05 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:28:08 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-void	display_end(t_state *game)
-{
-	int	mid_y;
-	int	mid_x;
-
-	mid_y = (game->mlx->height / 2) - 10;
-	mid_x = (game->mlx->width / 2) - ((ft_strlen("Game Over [press Esc]") * 10) / 2);
-	game->end_img = mlx_put_string(game->mlx, "Game Over [press Esc]", mid_x, mid_y);
-}
+#include "so_long_valid.h"
 
 void	display_steps(t_state *game)
 {

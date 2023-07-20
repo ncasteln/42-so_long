@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_messages.c                                 :+:      :+:    :+:   */
+/*   free_all_valid.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 11:07:27 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 10:51:05 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/20 12:27:54 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_valid.h"
 
-void	display_end(t_state *game)
+void	lst_delnode(void *line)
 {
-	int	mid_y;
-	int	mid_x;
-
-	mid_y = (game->mlx->height / 2) - 10;
-	mid_x = (game->mlx->width / 2) - ((ft_strlen("Game Over [press Esc]") * 10) / 2);
-	game->end_img = mlx_put_string(game->mlx, "Game Over [press Esc]", mid_x, mid_y);
+	if (line)
+		free(line);
 }
 
-void	display_steps(t_state *game)
+void	free_all(t_state *game)
 {
-	game->steps += 1;
-	ft_printf("Steps: %d\n", game->steps);
+	if (game->map)
+		nc_dptr_free(game->map);
 }
