@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/20 14:20:42 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/21 08:37:22 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,14 +120,6 @@ $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
 	-o $(NAME)
 	@echo "$(GREEN)	$@ successfully compiled!"
 
-# $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
-# 	@echo "$(NC)Compiling $@ executable file..."
-# 	@$(CC) $(CFLAGS) \
-# 	$(OBJS) $(MYLIB) $(MLX42) \
-# 	-lglfw -L$(GLFW) \
-# 	-o $(NAME)
-# 	@echo "$(GREEN)	$@ successfully compiled!"
-
 $(NAME)_valid: $(MYLIB) $(OBJS) $(OBJS_FLAG)
 	@echo "$(NC)Compiling $@ executable file..."
 	@$(CC) $(CFLAGS) \
@@ -139,7 +131,8 @@ $(MYLIB):
 	@echo "$(NC)Compiling dependencies..."
 	@$(MAKE) -C $(MYLIB_DIR)
 
-$(MLX42): $(HBREW) $(CMAKE) $(GLFW)
+# -------------------------------------------------------- MLX42 & DEPENDENCIES
+$(MLX42): $(HBREW) $(CMAKE) $(GLFW) $(MLX42_DIR)
 	@echo "$(NC)Compiling $@..."
 	cd $(MLX42_DIR) && cmake -B build
 	$(MAKE) -C $(MLX42_DIR)build -j4
@@ -152,20 +145,10 @@ $(CMAKE):
 $(GLFW):
 	@echo "$(NC)Installing [glfw]"
 	@brew install glfw
-# $(MLX42): $(HBREW) $(CMAKE) $(GLFW)
-# 	@echo "$(NC)Compiling $@..."
-# 	cd $(MLX42_DIR) && cmake -B build
-# 	$(MAKE) -C $(MLX42_DIR)build -j4
-# $(HBREW):
-# 	@echo "$(NC)Getting [42homebrew]"
-# 	@$(GET_HBREW)
-# $(CMAKE):
-# 	@echo "$(NC)Installing [cmake]"
-# 	@brew reinstall cmake
-# $(GLFW):
-# 	@echo "$(NC)Installing [glfw]"
-# 	@brew reinstall glfw
+$(MLX42_DIR):
+	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
 
+# --------------------------------------------------------------------- OBJECTS
 $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(OBJS_DIR)
 	@cc $(CFLAGS) -c $< -o $@ $(INCLUDE)
@@ -180,20 +163,21 @@ $(OBJS_FLAG):
 	@touch $(OBJS_FLAG)
 	@echo "$(YELLOW)	Created [objs_flag]"
 
+# ------------------------------------------------------------------- CLEANING
 clean:
-	@echo "$(NC)Removing [mylib]..."
+	@echo "$(NC)Removing [so_long] objs..."
 	@rm -rf $(OBJS_DIR)
-	@$(MAKE) clean -C $(MYLIB_DIR)
-
-fclean: clean
 	@echo "$(NC)Destroying [mylib] archives..."
+	@$(MAKE) fclean -C $(MYLIB_DIR)
+
+# Clean every build, included MLX42
+fclean: clean
 	@echo "$(NC)Removing [MLX42 build]..."
 	@rm -rf $(MLX42_DIR)build/
 	@echo "$(NC)Removing [$(NAME)]..."
 	@rm -f $(NAME)
 	@echo "$(NC)Removing [$(NAME)_valid]..."
 	@rm -f $(NAME)_valid
-	@$(MAKE) fclean -C $(MYLIB_DIR)
 
 re: fclean all
 
