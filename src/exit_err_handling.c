@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 10:50:12 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 09:17:30 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:15:11 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_err_str(int err_code)
 	if (err_code == DOUB_ITEM)
 		return ("Double item found");
 	if (err_code == MISS_ITEM)
-		return ("Double item found");
+		return ("An item is missing");
 	if (err_code == INV_MAPSHAPE)
 		return ("Map is not rectangular");
 	if (err_code == MAP_FAIL)

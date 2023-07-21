@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/21 09:14:21 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/21 10:45:45 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,19 +25,36 @@ GNL = $(MYLIB_DIR)get_next_line/libgnl.a
 LIBNC = $(MYLIB_DIR)libnc/libnc.a
 
 # ------------------------------------------------------------------------ MLX42
-BREW = /Users/$(USER)/goinfre/.brew/
-BREW_ALT = /Users/$(USER)/.brew/
-HBREW = /Users/$(USER)/.brewconfig.zsh
-ifeq ($(wildcard $(BREW)), )
-	BREW = $(BREW_ALT)
-endif
-ifeq ($(wildcard $(BREW)), )
-	BREW = $(HBREW)
-endif
-GET_HBREW = curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
+GLFW = /Users/ncasteln/goinfre/.Brew/opt/glfw/lib/
 
-CMAKE = $(BREW)Cellar/cmake/3.27.0
-GLFW = $(BREW)Cellar/glfw/3.3.8/lib/
+# ------------------------------------------------------------------------ MLX42
+# BREW = /Users/$(USER)/goinfre/.brew/
+# BREW_ALT = /Users/$(USER)/.brew/
+# HBREW = /Users/$(USER)/.brewconfig.zsh
+# ifeq ($(wildcard $(BREW)), )
+# 	BREW = $(BREW_ALT)
+# endif
+# ifeq ($(wildcard $(BREW)), )
+# 	BREW = $(HBREW)
+# endif
+# GET_HBREW = curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
+
+# CMAKE = $(BREW)Cellar/cmake/3.27.0
+
+# GLFW = /Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.8/lib/
+# GLFW_ALT_1 = /Users/$(USER)/goinfre/.brew/opt/glfw/3.3.8/lib/
+# GLFW_ALT_2 = /Users/$(USER)/.brew/opt/glfw/lib
+# GLFW_ALT_3 = /Users/$(USER)/.brew/Cellar/glfw/lib
+# ifeq ($(wildcard $(GLFW)), )
+# 	GLFW = $(GLFW_ALT_1)
+# endif
+# ifeq ($(wildcard $(GLFW)), )
+# 	GLFW = $(GLFW_ALT_2)
+# endif
+# ifeq ($(wildcard $(GLFW)), )
+# 	GLFW = $(GLFW_ALT_3)
+# endif
+
 MLX42 = $(MLX42_DIR)build/libmlx42.a
 MLX42_DIR = ./lib/MLX42/
 
@@ -120,6 +137,14 @@ $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
 	-o $(NAME)
 	@echo "$(GREEN)	$@ successfully compiled!"
 
+# $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
+# 	@echo "$(NC)Compiling $@ executable file..."
+# 	@$(CC) $(CFLAGS) \
+# 	$(OBJS) $(MYLIB) $(MLX42) \
+# 	-lglfw -L$(GLFW) \
+# 	-o $(NAME)
+# 	@echo "$(GREEN)	$@ successfully compiled!"
+
 $(NAME)_valid: $(MYLIB) $(OBJS) $(OBJS_FLAG)
 	@echo "$(NC)Compiling $@ executable file..."
 	@$(CC) $(CFLAGS) \
@@ -132,21 +157,30 @@ $(MYLIB):
 	@$(MAKE) -C $(MYLIB_DIR)
 
 # -------------------------------------------------------- MLX42 & DEPENDENCIES
-$(MLX42): $(BREW) $(CMAKE) $(GLFW) $(MLX42_DIR)
+$(MLX42): $(MLX42_DIR)
 	@echo "$(NC)Compiling $@..."
 	cd $(MLX42_DIR) && cmake -B build
 	$(MAKE) -C $(MLX42_DIR)build -j4
-$(BREW):
-	@echo "$(NC)Getting [42homebrew]"
-	@$(GET_HBREW)
-$(CMAKE):
-	@echo "$(NC)Installing [cmake]"
-	@brew install cmake
-$(GLFW):
-	@echo "$(NC)Installing [glfw]"
-	@brew install glfw
+
 $(MLX42_DIR):
 	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
+
+# -------------------------------------------------------- MLX42 & DEPENDENCIES
+# $(MLX42): $(BREW) $(CMAKE) $(GLFW) $(MLX42_DIR)
+# 	@echo "$(NC)Compiling $@..."
+# 	cd $(MLX42_DIR) && cmake -B build
+# 	$(MAKE) -C $(MLX42_DIR)build -j4
+# $(BREW):
+# 	@echo "$(NC)Getting [42homebrew]"
+# 	@$(GET_HBREW)
+# $(CMAKE):
+# 	@echo "$(NC)Installing [cmake]"
+# 	@brew install cmake
+# $(GLFW):
+# 	@echo "$(NC)Installing [glfw]"
+# 	@brew install glfw
+# $(MLX42_DIR):
+# 	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
 
 # --------------------------------------------------------------------- OBJECTS
 $(OBJS_DIR)%.o: %.c
@@ -176,8 +210,8 @@ fclean_mlx:
 
 # Clean every build, included MLX42
 fclean: clean
-	@echo "$(NC)Removing [MLX42 build folder]..."
-	@rm -rf $(MLX42_DIR)build/
+# @echo "$(NC)Removing [MLX42 build folder]..."
+# @rm -rf $(MLX42_DIR)build/
 	@echo "$(NC)Removing [$(NAME)]..."
 	@rm -f $(NAME)
 	@echo "$(NC)Removing [$(NAME)_valid]..."

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 09:24:21 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:53:09 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int32_t	main(int argc, char **argv)
 {
 	t_state	game;
+	t_data	*data;
 
 	ft_bzero(&game, sizeof(t_state));
 	validate(argc, argv, &game);
-	init_window(&game);
-	mlx_key_hook(game.mlx, handle_key, &game);
-	draw_map(&game);
-	mlx_loop(game.mlx);
-	free_all(&game); // --- --- --- -- needed ???
-	mlx_terminate(game.mlx);
+	// init_window(&game);
+	// mlx_key_hook(game.mlx, handle_key, &game);
+	// draw_map(&game);
+	// mlx_loop(game.mlx);
+	// free_all(&game); // --------------- needed ???
+	// mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

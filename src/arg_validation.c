@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:02:21 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 09:24:28 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:51:49 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,26 @@ static t_list	*lines_to_lst(const char *path)
 	{
 		new_node = ft_lstnew(s);
 		if (!new_node)
-			return (ft_lstclear(&lst, lst_delnode), NULL);
+			return (ft_lstclear(&lst, del_line), NULL);
 		ft_lstadd_back(&lst, new_node);
 		s = get_next_line(fd);
 	}
 	close(fd);
 	if (!lst)
-		return (ft_lstclear(&lst, lst_delnode), NULL);
+		return (ft_lstclear(&lst, del_line), NULL);
 	return (lst);
 }
 
 void	validate(int argc, char **argv, t_state *game)
 {
-	t_list	*lst;
-
 	if (!(argc == 2) || !(nc_is_valid_ext(argv[1], ".ber")))
 		err_print(game, INV_ARG);
-	lst = lines_to_lst(argv[1]);
-	if (!lst)
+	game->data.lines = lines_to_lst(argv[1]);
+	if (!game->data.lines)
 		err_print(game, READ_LST_FAIL);
-	is_valid_format(lst, game);
-	game->data.map = lst_to_dptr(lst, ft_lstsize(lst));
-	ft_lstclear(&lst, lst_delnode);
+	is_valid_format(game);
+	game->data.map = lst_to_dptr(game->data.lines, ft_lstsize(game->data.lines));
+	ft_lstclear(&game->data.lines, del_line);
 	if (!game->data.map)
 		err_print(game, MAP_FAIL);
 	is_valid_path(game);

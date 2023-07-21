@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 08:57:23 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:50:05 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ enum e_err_code
 
 // ------------------------------------------------------------------ VALIDATION
 void	validate(int argc, char **argv, t_state *game);
-void	is_valid_format(t_list *lst, t_state *game);
+void	is_valid_format(t_state *game);
 void	is_valid_path(t_state *game);
 
 // ---------------------------------------------------------------------- WINDOW
@@ -72,7 +72,7 @@ void	pc_move(t_state *game, int y, int x);
 
 // ----------------------------------------------------------------------- UTILS
 void	free_all(t_state *game);
-void	lst_delnode(void *line);
+void	del_line(void *line);
 void	state_print(t_state *game);
 void	lst_print(t_list *lst);
 char	**lst_to_dptr(t_list *lst, int y);

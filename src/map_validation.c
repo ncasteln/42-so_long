@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 09:07:06 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:51:47 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,6 @@ static int	is_double(char c, t_state *game, int y, int x)
 		game->data.e += 1;
 	}
 	return (0);
-	// if (c == 'P')
-	// {
-	// 	if (game->p.x || game->p.y)
-	// 		return (1);
-	// 	game->p.y = y;
-	// 	game->p.x = x;
-	// }
-	// if (c == 'E')
-	// {
-	// 	if (game->e)
-	// 		return (1);
-	// 	game->e += 1;
-	// }
-	// return (0);
 }
 
 static int	is_valid_item(char c)
@@ -64,31 +50,29 @@ static int	is_valid_item(char c)
 	return (0);
 }
 
-static void	is_valid_mid_line(t_list **lst, t_state *game, int y)
+static void	is_valid_mid_line(const char *line, t_state *game, int y)
 {
 	size_t		x;
-	const char	*curr_line;
 
 	x = 0;
-	curr_line = (*lst)->content;
-	while (curr_line[x])
+	ft_printf("line %s\n", line);
+	while (line[x])
 	{
-		if ((x == 0) && (curr_line[x] != '1'))
-			return (ft_lstclear(lst, lst_delnode), err_print(game, INV_FORMAT));
-		if ((x > 0 && x < ft_strlen(curr_line) - 2))
+		if ((x == 0) && (line[x] != '1'))
+			return (err_print(game, INV_FORMAT));
+		if ((x > 0 && x < ft_strlen(line) - 2))
 		{
-			if (!is_valid_item(curr_line[x]))
-				return (ft_lstclear(lst, lst_delnode), err_print(game, INV_ITEM));
-			if (curr_line[x] == 'P' && is_double('P', game, y, x))
-				return (ft_lstclear(lst, lst_delnode), err_print(game, DOUB_ITEM));
-			if (curr_line[x] == 'E' && is_double('E', game, y, x))
-				return (ft_lstclear(lst, lst_delnode), err_print(game, DOUB_ITEM));
-			if (curr_line[x] == 'C')
+			if (!is_valid_item(line[x]))
+				return (err_print(game, INV_ITEM));
+			if (line[x] == 'P' && is_double('P', game, y, x))
+				return (err_print(game, DOUB_ITEM));
+			if (line[x] == 'E' && is_double('E', game, y, x))
+				return (err_print(game, DOUB_ITEM));
+			if (line[x] == 'C')
 				game->data.c += 1;
-				// game->c += 1;
 		}
-		if ((x == ft_strlen(curr_line) - 2) && (curr_line[x] != '1'))
-			return (ft_lstclear(lst, lst_delnode), err_print(game, INV_FORMAT));
+		if ((x == ft_strlen(line) - 2) && (line[x] != '1'))
+			return (err_print(game, INV_FORMAT));
 		x++;
 	}
 }
@@ -112,36 +96,31 @@ static int	is_rectangle(t_list *lst)
 
 /* This function check the line format and call other functions which
 check other validation requirements (n of items, kind of items etc.) */
-static void	is_valid_line(t_state *game, t_list *lst)
+static void	is_valid_line(t_state *game)
 {
-	int	y;
+	int		y;
+	t_list	*temp;
 
-	if (!(is_valid_first_last_line(lst->content)))
-		return (ft_lstclear(&lst, lst_delnode), err_print(game, INV_FORMAT));
-	lst = lst->next;
-	y = 0;
-	while (lst->next)
+	temp = game->data.lines;
+	if (!(is_valid_first_last_line(temp->content)))
+		return (err_print(game, INV_FORMAT));
+	y = 1;
+	temp = temp->next;
+	while (temp->next)
 	{
+		is_valid_mid_line(temp->content, game, y);
+		temp = temp->next;
 		y++;
-		is_valid_mid_line(&lst, game, y); // more specific
-		// if (!is_valid_mid_line(lst->content, game, y)) // more specific
-		// 	return (ft_lstclear(&lst, lst_delnode), err_print(game, INV_FORMAT));
-		lst = lst->next;
 	}
-	if (!(is_valid_first_last_line(lst->content)))
-		return (ft_lstclear(&lst, lst_delnode), err_print(game, INV_FORMAT));
+	if (!(is_valid_first_last_line(temp->content)))
+		return (err_print(game, INV_FORMAT));
 }
 
-void	is_valid_format(t_list *lst, t_state *game)
+void	is_valid_format(t_state *game)
 {
-	is_valid_line(game, lst);
+	is_valid_line(game);
 	if (!(game->data.p.x) || !(game->data.e) || !(game->data.c))
-		return (ft_lstclear(&lst, lst_delnode), err_print(game, MISS_ITEM));
-	if (!is_rectangle(lst))
-		return (ft_lstclear(&lst, lst_delnode), err_print(game, INV_MAPSHAPE));
-	// is_valid_line(game, lst);
-	// if (!(game->p.x) || !(game->e) || !(game->c))
-	// 	return (ft_lstclear(&lst, lst_delnode), err_print(game, MISS_ITEM));
-	// if (!is_rectangle(lst))
-	// 	return (ft_lstclear(&lst, lst_delnode), err_print(game, INV_MAPSHAPE));
+		return (err_print(game, MISS_ITEM));
+	if (!is_rectangle(game->data.lines))
+		return (err_print(game, INV_MAPSHAPE));
 }

@@ -6,13 +6,13 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 09:16:42 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 10:11:57 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	lst_delnode(void *line)
+void	del_line(void *line)
 {
 	if (line)
 		free(line);
@@ -42,10 +42,12 @@ void	free_all(t_state *game)
 {
 	if (game->data.map)
 		nc_dptr_free(game->data.map);
-	if (game->img)
-		free_images(game->mlx, game->img); // ???
+	if (game->data.lines)
+		ft_lstclear(&game->data.lines, del_line);
 	if (game->txt)
 		free_textures(game->txt);
+	if (game->img)
+		free_images(game->mlx, game->img); // ????????????????????????
 	if (game->end_img)
-		mlx_delete_image(game->mlx, game->end_img); // ???
+		mlx_delete_image(game->mlx, game->end_img); // ???????????????
 }
