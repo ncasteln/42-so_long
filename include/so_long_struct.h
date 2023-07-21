@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 10:52:55 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 11:27:24 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "so_long.h"
 
 // -------------------------------------------------------------------- TEXTURES
-typedef struct	s_txt
+typedef struct s_txt
 {
 	mlx_texture_t	*p;
 	mlx_texture_t	*e_0;
@@ -61,8 +61,8 @@ typedef struct s_state
 {
 	struct s_data	*data;
 	mlx_image_t		*end_img;
-	struct	s_img	*img;
-	struct	s_txt	*txt;
+	struct s_img	*img;
+	struct s_txt	*txt;
 	mlx_t			*mlx;
 }				t_state;
 

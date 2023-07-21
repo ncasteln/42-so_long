@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/21 10:45:45 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/21 11:45:48 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,12 +63,13 @@ VPATH = ./src/:./src_bonus/:./src_valid/
 OBJS_DIR = ./objs/
 # ------------------------------------------------------------------------- MAND
 SRC = main.c \
-	init_window.c \
+	init_mlx_elements.c \
 	state_print.c \
 	lst_to_dptr.c \
 	key_handling.c \
 	arg_validation.c \
-	map_validation.c \
+	lines_validation.c \
+	items_validation.c \
 	move_calc.c \
 	path_validation.c \
 	map_drawing.c \
@@ -98,20 +99,6 @@ ifneq ($(filter bonus,$(MAKECMDGOALS)),)
 	OBJS_FLAG = $(OBJS_DIR).bonus_flag
 endif
 
-# ------------------------------------------------------------------------ VALID
-SRC_VALID = main_valid.c \
-	lst_to_dptr_valid.c \
-	arg_validation_valid.c \
-	map_validation_valid.c \
-	path_validation_valid.c \
-	free_all_valid.c \
-	display_messages_valid.c \
-	exit_err_handling_valid.c
-ifneq ($(filter valid,$(MAKECMDGOALS)),)
-	OBJS = $(addprefix $(OBJS_DIR), $(SRC_VALID:.c=.o))
-	OBJS_FLAG = $(OBJS_DIR).valid_flag
-endif
-
 # --------------------------------------------------------------------- INCLUDES
 INCLUDE = -I ./include/ \
 	-I ./lib/mylib/libft/include/ \
@@ -135,21 +122,6 @@ $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
 	$(OBJS) $(MYLIB) $(MLX42) \
 	-lglfw -L$(GLFW) \
 	-o $(NAME)
-	@echo "$(GREEN)	$@ successfully compiled!"
-
-# $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
-# 	@echo "$(NC)Compiling $@ executable file..."
-# 	@$(CC) $(CFLAGS) \
-# 	$(OBJS) $(MYLIB) $(MLX42) \
-# 	-lglfw -L$(GLFW) \
-# 	-o $(NAME)
-# 	@echo "$(GREEN)	$@ successfully compiled!"
-
-$(NAME)_valid: $(MYLIB) $(OBJS) $(OBJS_FLAG)
-	@echo "$(NC)Compiling $@ executable file..."
-	@$(CC) $(CFLAGS) \
-	$(OBJS) $(MYLIB) \
-	-o $(NAME)_valid
 	@echo "$(GREEN)	$@ successfully compiled!"
 
 $(MYLIB):
@@ -192,7 +164,6 @@ $(OBJS_DIR)%.o: %.c
 $(OBJS_FLAG):
 	@rm -rf $(OBJS_DIR).mand_flag
 	@rm -rf $(OBJS_DIR).bonus_flag
-	@rm -rf $(OBJS_DIR).valid_flag
 	@mkdir -p $(OBJS_DIR)
 	@touch $(OBJS_FLAG)
 	@echo "$(YELLOW)	Created [objs_flag]"
@@ -204,18 +175,21 @@ clean:
 	@echo "$(NC)Destroying [mylib] archives..."
 	@$(MAKE) fclean -C $(MYLIB_DIR)
 
-fclean_mlx:
-	@echo "$(NC)Removing [MLX42]..."
-	@rm -rf $(MLX42_DIR)
+clean_mlx:
+	@echo "$(NC)Removing [MLX42 build]..."
+	@rm -rf $(MLX42_DIR)/build/
+	@echo "$(GREEN)	[MLX42 build] removed!"
 
 # Clean every build, included MLX42
 fclean: clean
-# @echo "$(NC)Removing [MLX42 build folder]..."
-# @rm -rf $(MLX42_DIR)build/
 	@echo "$(NC)Removing [$(NAME)]..."
 	@rm -f $(NAME)
-	@echo "$(NC)Removing [$(NAME)_valid]..."
-	@rm -f $(NAME)_valid
+	@echo "$(GREEN)	[$(NAME)] removed!"
+
+fclean_mlx:
+	@echo "$(NC)Removing [MLX42]..."
+	@rm -rf $(MLX42_DIR)
+	@echo "$(GREEN)	[MLX42] removed!"
 
 re: fclean all
 

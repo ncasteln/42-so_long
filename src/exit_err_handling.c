@@ -6,13 +6,24 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 10:50:12 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 10:15:11 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 11:51:21 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*get_err_str(int err_code)
+static char	*get_err_mlx(int err_code)
+{
+	if (err_code == MLX_FAIL)
+		return ("Failed init window");
+	if (err_code == MLX_IMG_FAIL)
+		return ("Failed mlx image / textures");
+	if (err_code == MLX_IMGWIN_FAIL)
+		return ("Failed put img to window");
+	return ("Unknow error");
+}
+
+static char	*get_err_str(int err_code)
 {
 	if (err_code == INV_ARG)
 		return ("Invalid arguments");
@@ -36,19 +47,15 @@ char	*get_err_str(int err_code)
 		return ("Map too big");
 	if (err_code == FAIL_IMGTEXT)
 		return ("Failed init texture / images");
-	if (err_code == MLX_FAIL)
-		return ("Failed init window");
-	if (err_code == MLX_IMGWIN_FAIL)
-		return ("Failed put img to window");
 	return ("Unknow error");
 }
 
-void	err_print(t_state *game, int err_code)
+void	err_print(int err_code)
 {
 	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(get_err_str(err_code), 2);
-	free_all(game); // ------------------------------------ needed ????
-	if (game->mlx)
-		mlx_terminate(game->mlx);
-	exit(EXIT_FAILURE);
+	if (err_code < 11)
+		ft_putendl_fd(get_err_str(err_code), 2);
+	else
+		ft_putendl_fd(get_err_mlx(err_code), 2);
+	exit (EXIT_FAILURE);
 }

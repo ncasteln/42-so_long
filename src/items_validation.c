@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_messages.c                                 :+:      :+:    :+:   */
+/*   items_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 11:07:27 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 11:27:45 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/21 11:44:20 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/21 11:46:36 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	display_end(t_state *game)
+/* Returns (1) if there is already the element, otherwise set its coordinates */
+int	is_double_item(char c, t_data *data, int y, int x)
 {
-	int	mid_y;
-	int	mid_x;
-
-	mid_y = (game->mlx->height / 2) - 10;
-	mid_x = (game->mlx->width / 2) - ((ft_strlen("Game Over [Esc]") * 10) / 2);
-	game->end_img = mlx_put_string(game->mlx, "Game Over [Esc]", mid_x, mid_y);
+	if (c == 'P')
+	{
+		if (data->p.x || data->p.y)
+			return (1);
+		data->p.y = y;
+		data->p.x = x;
+	}
+	if (c == 'E')
+	{
+		if (data->e)
+			return (1);
+		data->e += 1;
+	}
+	return (0);
 }
 
-void	display_steps(t_state *game)
+int	is_valid_item(char c)
 {
-	game->data->steps += 1;
-	ft_printf("Steps: %d\n", game->data->steps);
+	if (c == 'P' || c == '1' || c == 'E' || c == '0' || c == 'C')
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 10:11:57 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 11:23:08 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,22 @@ static void	free_textures(t_txt *txt)
 	mlx_delete_texture(txt->wall);
 }
 
-void	free_all(t_state *game)
+void	free_state(t_state *game)
 {
-	if (game->data.map)
-		nc_dptr_free(game->data.map);
-	if (game->data.lines)
-		ft_lstclear(&game->data.lines, del_line);
+	if (game->data)
+		free_data(game->data);
 	if (game->txt)
 		free_textures(game->txt);
 	if (game->img)
-		free_images(game->mlx, game->img); // ????????????????????????
+		free_images(game->mlx, game->img);
 	if (game->end_img)
-		mlx_delete_image(game->mlx, game->end_img); // ???????????????
+		mlx_delete_image(game->mlx, game->end_img);
+}
+
+void	free_data(t_data *data)
+{
+	if (data->map)
+		nc_dptr_free(data->map);
+	if (data->lines)
+		ft_lstclear(&data->lines, del_line);
 }
