@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:02:21 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 12:33:05 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:49:27 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	validate(int argc, char **argv, t_data *data)
 	data->map = lst_to_dptr(data->lines, ft_lstsize(data->lines));
 	ft_lstclear(&data->lines, del_line);
 	if (!data->map)
-		return (err_print(MAP_FAIL));
+		return (free_data(data), err_print(MAP_FAIL));
 	is_valid_path(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:14:44 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 13:11:36 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:57:41 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handle_event(void *param)
 
 	game = (t_state *) param;
 	set_counter(game);
-	if (!game->data->is_end)
+	if (game->data->n.x && !game->data->is_end)
 	{
 		if (game->data->counter % 33 == 0)
 			n_move(game);

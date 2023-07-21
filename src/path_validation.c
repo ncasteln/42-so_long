@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 11:42:41 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:50:50 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	is_valid_path(t_data *data)
 	check_neighbors(map_cpy, data->p.y, data->p.x, items);
 	if (items[0] != 0 || items[1] != 0)
 		return (free_data(data), nc_dptr_free(map_cpy), err_print(INV_PATH));
-	nc_dptr_free(map_cpy);
+	return (nc_dptr_free(map_cpy));
 }

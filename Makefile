@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/21 13:15:03 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/21 13:55:35 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,43 +24,21 @@ FT_PRINTF = $(MYLIB_DIR)ft_printf/libftprintf.a
 GNL = $(MYLIB_DIR)get_next_line/libgnl.a
 LIBNC = $(MYLIB_DIR)libnc/libnc.a
 
-# ------------------------------------------------------------------------ MLX42
-GLFW = /Users/ncasteln/goinfre/.Brew/opt/glfw/lib/
-
-# ------------------------------------------------------------------------ MLX42
-# BREW = /Users/$(USER)/goinfre/.brew/
-# BREW_ALT = /Users/$(USER)/.brew/
-# HBREW = /Users/$(USER)/.brewconfig.zsh
-# ifeq ($(wildcard $(BREW)), )
-# 	BREW = $(BREW_ALT)
-# endif
-# ifeq ($(wildcard $(BREW)), )
-# 	BREW = $(HBREW)
-# endif
-# GET_HBREW = curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
-
-# CMAKE = $(BREW)Cellar/cmake/3.27.0
-
+# ------------------------------------------------------------------------ GLFW
+GLFW = /Users/$(USER)/goinfre/.brew/opt/glfw/lib/
+# GLFW = /Users/$(USER)/goinfre/.brew/opt/glfw/3.3.8/lib/
 # GLFW = /Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.8/lib/
-# GLFW_ALT_1 = /Users/$(USER)/goinfre/.brew/opt/glfw/3.3.8/lib/
-# GLFW_ALT_2 = /Users/$(USER)/.brew/opt/glfw/lib
-# GLFW_ALT_3 = /Users/$(USER)/.brew/Cellar/glfw/lib
-# ifeq ($(wildcard $(GLFW)), )
-# 	GLFW = $(GLFW_ALT_1)
-# endif
-# ifeq ($(wildcard $(GLFW)), )
-# 	GLFW = $(GLFW_ALT_2)
-# endif
-# ifeq ($(wildcard $(GLFW)), )
-# 	GLFW = $(GLFW_ALT_3)
-# endif
+# GLFW = /Users/$(USER)/.brew/opt/glfw/lib
+# GLFW = /Users/$(USER)/.brew/Cellar/glfw/lib
 
+# ------------------------------------------------------------------------ MLX42
 MLX42 = $(MLX42_DIR)build/libmlx42.a
 MLX42_DIR = ./lib/MLX42/
 
 # ------------------------------------------------------------------------- SRCS
 VPATH = ./src/:./src_bonus/
 OBJS_DIR = ./objs/
+
 # ------------------------------------------------------------------------- MAND
 SRC = main.c \
 	init_mlx_elements.c \
@@ -70,7 +48,7 @@ SRC = main.c \
 	arg_validation.c \
 	lines_validation.c \
 	items_validation.c \
-	move_calc.c \
+	p_move_calc.c \
 	path_validation.c \
 	map_drawing.c \
 	free_all.c \
@@ -142,23 +120,6 @@ $(MLX42): $(MLX42_DIR)
 
 $(MLX42_DIR):
 	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
-
-# -------------------------------------------------------- MLX42 & DEPENDENCIES
-# $(MLX42): $(BREW) $(CMAKE) $(GLFW) $(MLX42_DIR)
-# 	@echo "$(NC)Compiling $@..."
-# 	cd $(MLX42_DIR) && cmake -B build
-# 	$(MAKE) -C $(MLX42_DIR)build -j4
-# $(BREW):
-# 	@echo "$(NC)Getting [42homebrew]"
-# 	@$(GET_HBREW)
-# $(CMAKE):
-# 	@echo "$(NC)Installing [cmake]"
-# 	@brew install cmake
-# $(GLFW):
-# 	@echo "$(NC)Installing [glfw]"
-# 	@brew install glfw
-# $(MLX42_DIR):
-# 	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
 
 # --------------------------------------------------------------------- OBJECTS
 $(OBJS_DIR)%.o: %.c
