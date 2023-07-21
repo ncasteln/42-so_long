@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 09:43:05 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:52:11 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /* This function make two things: counts the C and E elements, and returns
 when it finds a wall, the player position, an already found position or
-an enemy. In these cases returns (0) as false, and the tile is not overwritten*/
-static int count_item(char item, int *c, int *e)
+an enemy. In these cases returns (0) as false, and the tile is not overwrit*/
+static int	count_item(char item, int *c, int *e)
 {
 	if (item == 'P' || item == '1' || item == ' ')
 		return (0);
@@ -55,18 +55,18 @@ static void	check_neighbors(char **map, int y, int x, int *items)
 	}
 }
 
-int	is_valid_path(t_state *game)
+void	is_valid_path(t_data *data)
 {
 	int		items[2];
 	char	**map_cpy;
 
-	items[0] = game->c;
-	items[1] = game->e;
-	map_cpy = nc_dptr_deepcpy(game->map);
+	items[0] = data->c;
+	items[1] = data->e;
+	map_cpy = nc_dptr_deepcpy(data->map);
 	if (!map_cpy)
-		return (err_print(game, 6), 6);
-	check_neighbors(map_cpy, game->p.y, game->p.x, items);
+		return (free_data(data), err_print(MAP_FAIL));
+	check_neighbors(map_cpy, data->p.y, data->p.x, items);
 	if (items[0] != 0 || items[1] != 0)
-		return (nc_dptr_free(map_cpy), err_print(game, 7), 7);
-	return (nc_dptr_free(map_cpy), 1);
+		return (free_data(data), nc_dptr_free(map_cpy), err_print(INV_PATH));
+	return (nc_dptr_free(map_cpy));
 }

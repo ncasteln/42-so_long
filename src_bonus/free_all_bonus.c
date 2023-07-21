@@ -6,13 +6,13 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 09:27:40 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:37:23 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	lst_delnode(void *line)
+void	del_line(void *line)
 {
 	if (line)
 		free(line);
@@ -44,15 +44,24 @@ static void	free_textures(t_txt *txt)
 	mlx_delete_texture(txt->wall);
 }
 
-void	free_all(t_state *game)
+void	free_state(t_state *game)
 {
-	if (game->map)
-		nc_dptr_free(game->map);
-	if (game->img)
-		free_images(game->mlx, game->img);
+	if (game->data)
+		free_data(game->data);
 	if (game->txt)
 		free_textures(game->txt);
-	if (game->steps_str)
-		free(game->steps_str); // ???????
-	// game ----> NULL or free() ?
+	if (game->img)
+		free_images(game->mlx, game->img);
+	if (game->end_img)
+		mlx_delete_image(game->mlx, game->end_img);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
+}
+
+void	free_data(t_data *data)
+{
+	if (data->map)
+		nc_dptr_free(data->map);
+	if (data->lines)
+		ft_lstclear(&data->lines, del_line);
 }

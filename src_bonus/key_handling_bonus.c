@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:49:15 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 14:42:13 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:30:31 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static void	win_controls(mlx_key_data_t keydata, t_state *game)
 {
-	if (keydata.key	== MLX_KEY_ESCAPE)
+	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(game->mlx);
 }
 
-static void	pc_controls(mlx_key_data_t keydata, t_state *game)
+static void	p_controls(mlx_key_data_t keydata, t_state *game)
 {
-	if (keydata.key	== MLX_KEY_W && is_possible_move(game, -1, 0, 'P'))
-		pc_move(game, -1, 0);
-	else if (keydata.key	== MLX_KEY_D && is_possible_move(game, 0, +1, 'P'))
+	if (keydata.key == MLX_KEY_W && is_possible_move(game, -1, 0, 'P'))
+		p_move(game, -1, 0);
+	else if (keydata.key == MLX_KEY_D && is_possible_move(game, 0, +1, 'P'))
 	{
-		game->p_last = 'r';
-		pc_move(game, 0, +1);
+		game->data->p_last = 'r';
+		p_move(game, 0, +1);
 	}
-	else if (keydata.key	== MLX_KEY_S && is_possible_move(game, +1, 0, 'P'))
-		pc_move(game, +1, 0);
-	else if (keydata.key	== MLX_KEY_A && is_possible_move(game, 0, -1, 'P'))
+	else if (keydata.key == MLX_KEY_S && is_possible_move(game, +1, 0, 'P'))
+		p_move(game, +1, 0);
+	else if (keydata.key == MLX_KEY_A && is_possible_move(game, 0, -1, 'P'))
 	{
-		game->p_last = 'l';
-		pc_move(game, 0, -1);
+		game->data->p_last = 'l';
+		p_move(game, 0, -1);
 	}
 }
 
@@ -43,8 +43,8 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 	game = (t_state *) param;
 	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{
-		if (!game->is_end)
-			pc_controls(keydata, game);
+		if (!game->data->is_end)
+			p_controls(keydata, game);
 		win_controls(keydata, game);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:14:44 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 16:04:54 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:11:36 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	set_counter(t_state *game)
 {
-	if (game->counter == 101)
-		game->counter = 0;
-	game->counter++;
+	if (game->data->counter == 101)
+		game->data->counter = 0;
+	game->data->counter++;
 }
 
 void	handle_event(void *param)
@@ -25,9 +25,9 @@ void	handle_event(void *param)
 
 	game = (t_state *) param;
 	set_counter(game);
-	if (!game->is_end)
+	if (!game->data->is_end)
 	{
-		if (game->counter % 33 == 0)
-			npc_move(game);
+		if (game->data->counter % 33 == 0)
+			n_move(game);
 	}
 }

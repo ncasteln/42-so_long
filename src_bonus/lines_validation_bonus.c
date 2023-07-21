@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lines_validation.c                                 :+:      :+:    :+:   */
+/*   lines_validation_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:18:08 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 12:16:46 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:34:37 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	is_valid_first_last_line(const char *s)
 {
@@ -26,7 +26,7 @@ static int	is_valid_first_last_line(const char *s)
 
 static void	is_valid_mid_line(const char *line, t_data *data, int y)
 {
-	size_t		x;
+	size_t	x;
 
 	x = 0;
 	while (line[x])
@@ -37,9 +37,11 @@ static void	is_valid_mid_line(const char *line, t_data *data, int y)
 		{
 			if (!is_valid_item(line[x]))
 				return (free_data(data), err_print(INV_ITEM));
-			if (line[x] == 'P' && is_double_item('P', data, y, x))
+			if (line[x] == 'P' && is_duplicate_item('P', data, y, x))
 				return (free_data(data), err_print(DOUB_ITEM));
-			if (line[x] == 'E' && is_double_item('E', data, y, x))
+			if (line[x] == 'E' && is_duplicate_item('E', data, y, x))
+				return (free_data(data), err_print(DOUB_ITEM));
+			if (line[x] == 'N' && is_duplicate_item('N', data, y, x))
 				return (free_data(data), err_print(DOUB_ITEM));
 			if (line[x] == 'C')
 				data->c += 1;
@@ -94,6 +96,6 @@ void	is_valid_format(t_data *data)
 	is_valid_line(data);
 	if (!(data->p.x) || !(data->e) || !(data->c))
 		return (free_data(data), err_print(MISS_ITEM));
-	if (!is_rectangle(data->lines))
+	if (!(is_rectangle(data->lines)))
 		return (free_data(data), err_print(INV_MAPSHAPE));
 }

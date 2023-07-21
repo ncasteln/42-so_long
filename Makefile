@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/21 11:45:48 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/21 13:15:03 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ MLX42 = $(MLX42_DIR)build/libmlx42.a
 MLX42_DIR = ./lib/MLX42/
 
 # ------------------------------------------------------------------------- SRCS
-VPATH = ./src/:./src_bonus/:./src_valid/
+VPATH = ./src/:./src_bonus/
 OBJS_DIR = ./objs/
 # ------------------------------------------------------------------------- MAND
 SRC = main.c \
@@ -81,21 +81,29 @@ OBJS_FLAG = $(OBJS_DIR).mand_flag
 
 # ------------------------------------------------------------------------ BONUS
 SRC_BONUS = main_bonus.c \
-	init_window_bonus.c \
+	init_mlx_elements_bonus.c \
 	state_print_bonus.c \
 	lst_to_dptr_bonus.c \
 	key_handling_bonus.c \
 	arg_validation_bonus.c \
-	map_validation_bonus.c \
-	move_calc_bonus.c \
+	lines_validation_bonus.c \
+	items_validation_bonus.c \
 	path_validation_bonus.c \
 	map_drawing_bonus.c \
 	free_all_bonus.c \
 	event_handling_bonus.c \
-	npc_move_calc_bonus.c \
-	display_messages_bonus.c
+	p_move_calc_bonus.c \
+	n_move_calc_bonus.c \
+	display_messages_bonus.c \
+	exit_err_handling_bonus.c \
+	reset_images_bonus.c \
+	possible_move_calc_bonus.c
 ifneq ($(filter bonus,$(MAKECMDGOALS)),)
-	OBJS = $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
+	OBJS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
+	OBJS_FLAG = $(OBJS_DIR).bonus_flag
+endif
+ifneq ($(filter re_bonus,$(MAKECMDGOALS)),)
+	OBJS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 	OBJS_FLAG = $(OBJS_DIR).bonus_flag
 endif
 
@@ -113,8 +121,6 @@ INCLUDE = -I ./include/ \
 all: $(NAME)
 
 bonus: $(NAME)
-
-valid: $(NAME)_valid
 
 $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
 	@echo "$(NC)Compiling $@ executable file..."
@@ -192,6 +198,8 @@ fclean_mlx:
 	@echo "$(GREEN)	[MLX42] removed!"
 
 re: fclean all
+
+re_bonus: fclean bonus
 
 GREEN = \033[0;32m
 YELLOW = \033[0;33m

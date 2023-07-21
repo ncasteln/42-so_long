@@ -6,13 +6,13 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 11:27:24 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:49:51 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_STRUCT_H
 # define SO_LONG_STRUCT_H
-# include "so_long.h"
+# include "MLX42.h"
 
 // -------------------------------------------------------------------- TEXTURES
 typedef struct s_txt

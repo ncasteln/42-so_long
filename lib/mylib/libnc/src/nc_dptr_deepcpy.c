@@ -6,42 +6,50 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:27:11 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/13 15:50:44 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:42:00 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libnc.h"
 
-/* Make a deepcpy of a dptr whose ptrs has a variable length (the whole structure
-is not a rectangle)*/
+static char	**allocate_lines(int y)
+{
+	char	**dst;
+
+	dst = NULL;
+	if (y)
+		dst = malloc (sizeof(char *) * (y + 1));
+	if (!dst)
+		return (NULL);
+	return (dst);
+}
+
+/* Make a deepcpy of a dptr whose ptrs has a variable length (the whole
+structure is not necessary a rectangle) */
 char	**nc_dptr_deepcpy(char **src)
 {
-	char	**p;
-	int		size_y;
+	char	**dst;
 	int		i;
 	int		j;
 
-	size_y = nc_dptr_size_y(src);
-	if (!size_y)
-		return (NULL);
-	p = malloc (sizeof(char *) * (size_y + 1));
-	if (!p)
+	dst = allocate_lines(nc_dptr_size_y(src));
+	if (!dst)
 		return (NULL);
 	i = 0;
 	while (src[i])
 	{
-		p[i] = malloc (sizeof(char) * (ft_strlen(src[i]) + 1));
-		if (!p[i])
-			return (nc_dptr_free(p), src = NULL, NULL);
+		dst[i] = malloc (sizeof(char) * (ft_strlen(src[i]) + 1));
+		if (!dst[i])
+			return (nc_dptr_free(dst), src = NULL, NULL);
 		j = 0;
 		while (src[i][j])
 		{
-			p[i][j] = src[i][j];
+			dst[i][j] = src[i][j];
 			j++;
 		}
-		p[i][j] = '\0';
+		dst[i][j] = '\0';
 		i++;
 	}
-	p[size_y] = NULL;
-	return (p);
+	dst[nc_dptr_size_y(src)] = NULL;
+	return (dst);
 }

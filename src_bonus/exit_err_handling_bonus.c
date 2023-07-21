@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_err_handling_valid.c                          :+:      :+:    :+:   */
+/*   exit_err_handling_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 10:50:12 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 13:26:32 by ncasteln         ###   ########.fr       */
+/*   Created: 2023/07/21 12:00:34 by ncasteln          #+#    #+#             */
+/*   Updated: 2023/07/21 12:45:10 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_valid.h"
+#include "so_long_bonus.h"
 
-char	*get_err_str(int err_code)
+static char	*get_err_mlx(int err_code)
+{
+	if (err_code == MLX_FAIL)
+		return ("Failed init window");
+	if (err_code == MLX_IMG_FAIL)
+		return ("Failed mlx image / textures");
+	if (err_code == MLX_IMGWIN_FAIL)
+		return ("Failed put img to window");
+	return ("Unknow error");
+}
+
+static char	*get_err_str(int err_code)
 {
 	if (err_code == INV_ARG)
 		return ("Invalid arguments");
@@ -25,7 +36,7 @@ char	*get_err_str(int err_code)
 	if (err_code == DOUB_ITEM)
 		return ("Double item found");
 	if (err_code == MISS_ITEM)
-		return ("Double item found");
+		return ("An item is missing");
 	if (err_code == INV_MAPSHAPE)
 		return ("Map is not rectangular");
 	if (err_code == MAP_FAIL)
@@ -36,17 +47,15 @@ char	*get_err_str(int err_code)
 		return ("Map too big");
 	if (err_code == FAIL_IMGTEXT)
 		return ("Failed init texture / images");
-	if (err_code == MLX_FAIL)
-		return ("Failed init window");
-	if (err_code == MLX_IMGWIN_FAIL)
-		return ("Failed put img to window");
 	return ("Unknow error");
 }
 
-void	err_print(t_state *game, int err_code)
+void	err_print(int err_code)
 {
 	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(get_err_str(err_code), 2);
-	free_all(game); // ------------------------------------ needed ????
-	exit(EXIT_FAILURE);
+	if (err_code < 11)
+		ft_putendl_fd(get_err_str(err_code), 2);
+	else
+		ft_putendl_fd(get_err_mlx(err_code), 2);
+	exit (EXIT_FAILURE);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_to_dptr.c                                      :+:      :+:    :+:   */
+/*   lst_to_dptr_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:15:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 10:50:57 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:58:06 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**lst_to_dptr(t_list *lst, int y)
 	{
 		map[i] = ft_calloc (ft_strlen(lst->content), sizeof(char));
 		if (!map[i])
-			return (nc_dptr_free(map), NULL); // free(everything)
+			return (nc_dptr_free(map), NULL);
 		ft_strlcpy(map[i], lst->content, ft_strlen(lst->content));
 		lst = lst->next;
 		i++;

@@ -6,13 +6,13 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/19 15:58:17 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:49:43 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_STRUCT_BONUS_H
 # define SO_LONG_STRUCT_BONUS_H
-# include "so_long_bonus.h"
+# include "MLX42.h"
 
 // -------------------------------------------------------------------- TEXTURES
 typedef struct s_txt
@@ -66,20 +66,30 @@ typedef struct s_char
 @ struct s_img	*img;		ptr images of the game
 @ struct s_txt	*txt;		ptr to textures of the game
 @ mlx_t			*mlx;		ptr mlx structure
-*/
-typedef struct s_state
+// */
+
+// ------------------------------------------------------------------ DATA STATE
+typedef struct s_data
 {
 	struct s_char	p;
 	char			p_last;
-	struct s_char	n;
 	int				e;
-	int				is_exit;
 	int				c;
-	int				counter;
+	struct s_char	n;
+	struct s_list	*lines;
 	char			**map;
 	int				steps;
 	char			*steps_str;
 	int				is_end;
+	int				is_exit;
+	int				counter;
+}				t_data;
+
+// ------------------------------------------------------------------ GAME STATE
+typedef struct s_state
+{
+	struct s_data	*data;
+	mlx_image_t		*end_img;
 	struct s_img	*img;
 	struct s_txt	*txt;
 	mlx_t			*mlx;

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 11:23:08 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:37:39 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	free_state(t_state *game)
 		free_images(game->mlx, game->img);
 	if (game->end_img)
 		mlx_delete_image(game->mlx, game->end_img);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 }
 
 void	free_data(t_data *data)

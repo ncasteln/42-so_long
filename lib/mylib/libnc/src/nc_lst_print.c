@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:41:56 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 10:43:51 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:28:55 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 depending on the content */
 void	lst_print(t_list *lst)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (lst && lst->next)
 	{
 		ft_printf("%s\n", lst->content);
