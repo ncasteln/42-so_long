@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 14:16:02 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:08:22 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,29 @@ void	is_valid_path(t_state *game)
 	int		items[2];
 	char	**map_cpy;
 
-	items[0] = game->c;
-	items[1] = game->e;
-	map_cpy = nc_dptr_deepcpy(game->map);
+	items[0] = game->data.c;
+	items[1] = game->data.e;
+	map_cpy = nc_dptr_deepcpy(game->data.map);
 	if (!map_cpy)
 		err_print(game, MAP_FAIL);
-	check_neighbors(map_cpy, game->p.y, game->p.x, items);
+	check_neighbors(map_cpy, game->data.p.y, game->data.p.x, items);
 	if (items[0] != 0 || items[1] != 0)
 		nc_dptr_free(map_cpy), err_print(game, INV_PATH);
 	nc_dptr_free(map_cpy);
 }
+
+// void	is_valid_path(t_state *game)
+// {
+// 	int		items[2];
+// 	char	**map_cpy;
+
+// 	items[0] = game->c;
+// 	items[1] = game->e;
+// 	map_cpy = nc_dptr_deepcpy(game->map);
+// 	if (!map_cpy)
+// 		err_print(game, MAP_FAIL);
+// 	check_neighbors(map_cpy, game->p.y, game->p.x, items);
+// 	if (items[0] != 0 || items[1] != 0)
+// 		nc_dptr_free(map_cpy), err_print(game, INV_PATH);
+// 	nc_dptr_free(map_cpy);
+// }

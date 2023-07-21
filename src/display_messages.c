@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:07:27 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 10:51:05 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:16:53 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	display_end(t_state *game)
 
 void	display_steps(t_state *game)
 {
-	game->steps += 1;
-	ft_printf("Steps: %d\n", game->steps);
+	game->data.steps += 1;
+	ft_printf("Steps: %d\n", game->data.steps);
 }

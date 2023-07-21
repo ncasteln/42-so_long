@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/21 08:37:22 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/21 09:14:21 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,11 +132,11 @@ $(MYLIB):
 	@$(MAKE) -C $(MYLIB_DIR)
 
 # -------------------------------------------------------- MLX42 & DEPENDENCIES
-$(MLX42): $(HBREW) $(CMAKE) $(GLFW) $(MLX42_DIR)
+$(MLX42): $(BREW) $(CMAKE) $(GLFW) $(MLX42_DIR)
 	@echo "$(NC)Compiling $@..."
 	cd $(MLX42_DIR) && cmake -B build
 	$(MAKE) -C $(MLX42_DIR)build -j4
-$(HBREW):
+$(BREW):
 	@echo "$(NC)Getting [42homebrew]"
 	@$(GET_HBREW)
 $(CMAKE):
@@ -170,9 +170,13 @@ clean:
 	@echo "$(NC)Destroying [mylib] archives..."
 	@$(MAKE) fclean -C $(MYLIB_DIR)
 
+fclean_mlx:
+	@echo "$(NC)Removing [MLX42]..."
+	@rm -rf $(MLX42_DIR)
+
 # Clean every build, included MLX42
 fclean: clean
-	@echo "$(NC)Removing [MLX42 build]..."
+	@echo "$(NC)Removing [MLX42 build folder]..."
 	@rm -rf $(MLX42_DIR)build/
 	@echo "$(NC)Removing [$(NAME)]..."
 	@rm -f $(NAME)
@@ -186,4 +190,4 @@ YELLOW = \033[0;33m
 RED = \033[0;31m
 NC = \033[0m
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean fclean_mlx re bonus

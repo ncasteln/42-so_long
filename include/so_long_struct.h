@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 08:28:33 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:23:46 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_img
 	mlx_image_t	*c;
 	mlx_image_t	*wall;
 	mlx_image_t	*ground;
-}			t_img;
+}				t_img;
 
 // ---------------------------------------------------------------------- PLAYER
 typedef struct s_char
@@ -43,39 +43,26 @@ typedef struct s_char
 	int			x;
 }				t_char;
 
-// ------------------------------------------------------------------ GAME STATE
-typedef struct s_state
+// ------------------------------------------------------------------ DATA STATE
+typedef struct s_data
 {
 	struct s_char	p;
-	int				is_exit;
 	int				e;
 	int				c;
 	char			**map;
 	int				steps;
 	int				is_end;
+	int				is_exit;
+}				t_data;
+
+// ------------------------------------------------------------------ GAME STATE
+typedef struct s_state
+{
+	struct s_data	data;
 	mlx_image_t		*end_img;
 	struct	s_img	*img;
 	struct	s_txt	*txt;
 	mlx_t			*mlx;
 }				t_state;
-
-// typedef struct s_state
-// {
-// 	struct s_char	p;
-// 	int				is_exit;
-// 	int				e;
-// 	int				c;
-// 	char			**map;
-// 	int				steps;
-// 	int				is_end;
-// }				t_state;
-
-// typedef struct s_graphic
-// {
-// 	mlx_image_t		*end_img;
-// 	struct	s_img	*img;
-// 	struct	s_txt	*txt;
-// 	mlx_t			*mlx;
-// }				t_graphic;
 
 #endif

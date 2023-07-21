@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:17:53 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/17 09:55:31 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:14:50 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	state_print(t_state *game)
 {
 	ft_printf("_________ GAME STATE _________\n");
-	ft_printf("Player [%d][%d]\n", game->p.y, game->p.x);
-	ft_printf("Exit: [%d]\n", game->c);
-	ft_printf("Collectibles: [%d]\n", game->c);
-	ft_printf("Last was exit: [%d]\n", game->is_exit);
+	ft_printf("Player [%d][%d]\n", game->data.p.y, game->data.p.x);
+	ft_printf("Exit: [%d]\n", game->data.c);
+	ft_printf("Collectibles: [%d]\n", game->data.c);
+	ft_printf("Last was exit: [%d]\n", game->data.is_exit);
 	ft_printf("\nMap\n");
-	nc_dptr_print(game->map);
+	nc_dptr_print(game->data.map);
 }

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:49:15 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 10:46:36 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:15:08 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 	game = (t_state *) param;
 	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{
-		if (!game->is_end)
+		if (!game->data.is_end)
 			pc_control(keydata, game);
 		win_control(keydata, game);
 	}

@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/20 13:24:33 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 09:16:42 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	free_textures(t_txt *txt)
 
 void	free_all(t_state *game)
 {
-	if (game->map)
-		nc_dptr_free(game->map);
+	if (game->data.map)
+		nc_dptr_free(game->data.map);
 	if (game->img)
 		free_images(game->mlx, game->img); // ???
 	if (game->txt)
