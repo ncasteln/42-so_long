@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:15:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 12:58:06 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:56:26 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ char	**lst_to_dptr(t_list *lst, int y)
 	char	**map;
 	int		i;
 
-	map = ft_calloc ((y + 1), sizeof(char *));
+	map = malloc (sizeof(char *) * (y + 1));
 	if (!map)
 		return (NULL);
 	i = 0;
 	while (i < y)
 	{
-		map[i] = ft_calloc (ft_strlen(lst->content), sizeof(char));
+		map[i] = malloc (sizeof(char) * ft_strlen(lst->content));
 		if (!map[i])
 			return (nc_dptr_free(map), NULL);
 		ft_strlcpy(map[i], lst->content, ft_strlen(lst->content));

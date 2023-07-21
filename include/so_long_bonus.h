@@ -6,12 +6,13 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 13:06:10 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:52:31 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
+			// # include "malloc.h" // remove// remove// remove// remove// remove
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"

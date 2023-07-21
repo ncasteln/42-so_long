@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 12:37:23 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:46:59 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	free_images(mlx_t *mlx, t_img *img)
 	mlx_delete_image(mlx, img->wall);
 	mlx_delete_image(mlx, img->steps_img);
 	mlx_delete_image(mlx, img->end_img);
+	free(img);
 }
 
 static void	free_textures(t_txt *txt)
@@ -40,8 +41,10 @@ static void	free_textures(t_txt *txt)
 	mlx_delete_texture(txt->e_1);
 	mlx_delete_texture(txt->c);
 	mlx_delete_texture(txt->n);
+	mlx_delete_texture(txt->ne);
 	mlx_delete_texture(txt->ground);
 	mlx_delete_texture(txt->wall);
+	free(txt);
 }
 
 void	free_state(t_state *game)
@@ -64,4 +67,6 @@ void	free_data(t_data *data)
 		nc_dptr_free(data->map);
 	if (data->lines)
 		ft_lstclear(&data->lines, del_line);
+	if (data->steps_str)
+		free(data->steps_str);
 }

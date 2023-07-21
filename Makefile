@@ -6,12 +6,12 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/21 13:55:35 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/21 16:52:46 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # *******************************************************************************
-# *																		VARIABLES
+# 																		VARIABLES
 # *******************************************************************************
 NAME = so_long
 CFLAGS = -g -Wall -Wextra -Werror
@@ -25,11 +25,11 @@ GNL = $(MYLIB_DIR)get_next_line/libgnl.a
 LIBNC = $(MYLIB_DIR)libnc/libnc.a
 
 # ------------------------------------------------------------------------ GLFW
-GLFW = /Users/$(USER)/goinfre/.brew/opt/glfw/lib/
-# GLFW = /Users/$(USER)/goinfre/.brew/opt/glfw/3.3.8/lib/
-# GLFW = /Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.8/lib/
-# GLFW = /Users/$(USER)/.brew/opt/glfw/lib
-# GLFW = /Users/$(USER)/.brew/Cellar/glfw/lib
+GLFW = -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/
+# GLFW = -lglfw -L./Users/$(USER)/goinfre/.brew/opt/glfw/3.3.8/lib/
+# GLFW = -lglfw -L./Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.8/lib/
+# GLFW = -lglfw -L./Users/$(USER)/.brew/opt/glfw/lib
+# GLFW = -lglfw -L./Users/$(USER)/.brew/Cellar/glfw/lib
 
 # ------------------------------------------------------------------------ MLX42
 MLX42 = $(MLX42_DIR)build/libmlx42.a
@@ -76,11 +76,7 @@ SRC_BONUS = main_bonus.c \
 	exit_err_handling_bonus.c \
 	reset_images_bonus.c \
 	possible_move_calc_bonus.c
-ifneq ($(filter bonus,$(MAKECMDGOALS)),)
-	OBJS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
-	OBJS_FLAG = $(OBJS_DIR).bonus_flag
-endif
-ifneq ($(filter re_bonus,$(MAKECMDGOALS)),)
+ifneq ($(filter bonus re_bonus,$(MAKECMDGOALS)),)
 	OBJS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 	OBJS_FLAG = $(OBJS_DIR).bonus_flag
 endif
@@ -91,10 +87,22 @@ INCLUDE = -I ./include/ \
 	-I ./lib/mylib/ft_printf/include/ \
 	-I ./lib/mylib/get_next_line/ \
 	-I ./lib/mylib/libnc/include/ \
-	-I ./lib/MLX42/include/MLX42/
+	-I ./lib/MLX42/include/MLX42/ \
+
+# ------------------------------------------------------------------------- LEAKS
+# Git repo which traces mem leaks without conflicting with MLX. Explore the link
+# to know more about it and leave a star if you find useful!
+# 1) add $(LEAK_FINDER_INCLUDE) to the rule which makes objects
+# 2) add $(LEAK_FINDER) to the the rule which build the program
+# 3) add #include "malloc.h at the top of the main .h file
+# 4) add function show_alloc_mem_ex() where you want to monitor the memory
+LEAK_FINDER = -L./leak_finder -lft_malloc
+LEAK_FINDER_INCLUDE = -I./leak_finder/includes
+GET_LEAK_FINDER = git clone https://github.com/iwillenshofer/leak_finder.git leak_finder
+GET_LEAK_FINDER_ALT = git clone git@github.com:iwillenshofer/leak_finder.git leak_finder
 
 # *******************************************************************************
-# *																			RULES
+# 																			RULES
 # *******************************************************************************
 all: $(NAME)
 
@@ -103,23 +111,13 @@ bonus: $(NAME)
 $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
 	@echo "$(NC)Compiling $@ executable file..."
 	@$(CC) $(CFLAGS) \
-	$(OBJS) $(MYLIB) $(MLX42) \
-	-lglfw -L$(GLFW) \
+	$(OBJS) $(MYLIB) $(MLX42) $(GLFW) \
 	-o $(NAME)
-	@echo "$(GREEN)	$@ successfully compiled!"
+	@echo "$(G)	$@ successfully compiled!"
 
 $(MYLIB):
 	@echo "$(NC)Compiling dependencies..."
 	@$(MAKE) -C $(MYLIB_DIR)
-
-# -------------------------------------------------------- MLX42 & DEPENDENCIES
-$(MLX42): $(MLX42_DIR)
-	@echo "$(NC)Compiling $@..."
-	cd $(MLX42_DIR) && cmake -B build
-	$(MAKE) -C $(MLX42_DIR)build -j4
-
-$(MLX42_DIR):
-	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
 
 # --------------------------------------------------------------------- OBJECTS
 $(OBJS_DIR)%.o: %.c
@@ -133,38 +131,65 @@ $(OBJS_FLAG):
 	@rm -rf $(OBJS_DIR).bonus_flag
 	@mkdir -p $(OBJS_DIR)
 	@touch $(OBJS_FLAG)
-	@echo "$(YELLOW)	Created [objs_flag]"
+	@echo "$(Y)	Created [objs_flag]"
 
 # ------------------------------------------------------------------- CLEANING
 clean:
-	@echo "$(NC)Removing [so_long] objs..."
+	@echo "$(NC)Removing [$(NAME)] objs..."
 	@rm -rf $(OBJS_DIR)
 	@echo "$(NC)Destroying [mylib] archives..."
 	@$(MAKE) fclean -C $(MYLIB_DIR)
 
-clean_mlx:
-	@echo "$(NC)Removing [MLX42 build]..."
-	@rm -rf $(MLX42_DIR)/build/
-	@echo "$(GREEN)	[MLX42 build] removed!"
-
-# Clean every build, included MLX42
 fclean: clean
 	@echo "$(NC)Removing [$(NAME)]..."
 	@rm -f $(NAME)
-	@echo "$(GREEN)	[$(NAME)] removed!"
-
-fclean_mlx:
-	@echo "$(NC)Removing [MLX42]..."
-	@rm -rf $(MLX42_DIR)
-	@echo "$(GREEN)	[MLX42] removed!"
+	@echo "$(G)	[$(NAME)] removed!"
 
 re: fclean all
 
 re_bonus: fclean bonus
 
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RED = \033[0;31m
+# -------------------------------------------------------- MLX42 & DEPENDENCIES
+$(MLX42): $(MLX42_DIR)
+	@echo "$(NC)Compiling $@..."
+	cd $(MLX42_DIR) && cmake -B build
+	$(MAKE) -C $(MLX42_DIR)build -j4
+
+$(MLX42_DIR):
+	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
+
+clean_mlx:
+	@echo "$(NC)Removing [MLX42 build]..."
+	@rm -rf $(MLX42_DIR)/build/
+	@echo "$(G)	[MLX42 build] removed!"
+
+fclean_mlx:
+	@echo "$(NC)Removing [MLX42]..."
+	@rm -rf $(MLX42_DIR)
+	@echo "$(G)	[MLX42] removed!"
+
+# ---------------------------------------------------------------- LEAKS FINDER
+leaks: $(LEAK_FINDER)
+
+$(LEAK_FINDER):
+	@echo "$(NC)Getting leak_checker...(visit $(G)$(GET_LEAK_FINDER) $(NC)and leave a star!)"
+	@$(GET_LEAK_FINDER)
+	@$(MAKE) -C ./leak_finder
+	@cp ./leak_finder/libft_malloc.so ./
+	@cp ./leak_finder/libft_malloc_x86_64_Darwin.so ./
+	@echo "$(G)	[leak_finder] compiled!"
+	@echo "$(Y)	Make sure to add necessary flag during compile..."
+
+clean_leaks:
+	@echo "$(NC)Removing [leak_finder]..."
+	@rm -rf libft_malloc_x86_64_Darwin.so
+	@rm -rf libft_malloc.so
+	@rm -rf ./leak_finder
+	@echo "$(G)	[leak_finder] removed!"
+
+G = \033[0;32m
+Y = \033[0;33m
+R = \033[0;31m
 NC = \033[0m
 
-.PHONY: all clean fclean fclean_mlx re bonus
+.PHONY: all clean fclean fclean_mlx re bonus leaks

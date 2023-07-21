@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 12:37:39 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:36:06 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	free_images(mlx_t *mlx, t_img *img)
 	mlx_delete_image(mlx, img->e);
 	mlx_delete_image(mlx, img->ground);
 	mlx_delete_image(mlx, img->wall);
+	free (img);
 }
 
 static void	free_textures(t_txt *txt)
@@ -36,6 +37,7 @@ static void	free_textures(t_txt *txt)
 	mlx_delete_texture(txt->pe_r);
 	mlx_delete_texture(txt->ground);
 	mlx_delete_texture(txt->wall);
+	free (txt);
 }
 
 void	free_state(t_state *game)
