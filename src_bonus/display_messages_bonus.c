@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:04:14 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 12:56:22 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:25:19 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,17 @@ void	display_steps(t_state *game)
 {
 	char	*temp_1;
 	char	*temp_2;
+	t_data	*data;
 
-	game->data->steps += 1;
-	if (game->data->steps_str)
-		free(game->data->steps_str);
+	data = game->data;
+	data->steps += 1;
+	if (data->steps_str)
+		free(data->steps_str);
 	temp_1 = ft_strdup("Steps: ");
-	temp_2 = ft_itoa(game->data->steps);
-	game->data->steps_str = ft_strjoin(temp_1, temp_2);
+	temp_2 = ft_itoa(data->steps);
+	data->steps_str = ft_strjoin(temp_1, temp_2);
 	free(temp_1);
 	free(temp_2);
-	redraw_items(game, 'S');
+	mlx_delete_image(game->mlx, game->img->steps_img);
+	game->img->steps_img = mlx_put_string(game->mlx, data->steps_str, 24, 24);
 }

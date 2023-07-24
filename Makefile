@@ -6,30 +6,29 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/21 16:52:46 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/24 16:49:02 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # *******************************************************************************
-# 																		VARIABLES
+#                                                                       VARIABLES
 # *******************************************************************************
 NAME = so_long
 CFLAGS = -g -Wall -Wextra -Werror
 
 # ------------------------------------------------------------------------ MYLIB
-MYLIB = $(LIBFT) $(FT_PRINTF) $(GNL) $(LIBNC)
+MYLIB = $(LIBFT) $(FT_PRINTF) $(GNL)
 MYLIB_DIR = ./lib/mylib/
 LIBFT = $(MYLIB_DIR)libft/libft.a
 FT_PRINTF = $(MYLIB_DIR)ft_printf/libftprintf.a
 GNL = $(MYLIB_DIR)get_next_line/libgnl.a
-LIBNC = $(MYLIB_DIR)libnc/libnc.a
 
 # ------------------------------------------------------------------------ GLFW
-GLFW = -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/
-# GLFW = -lglfw -L./Users/$(USER)/goinfre/.brew/opt/glfw/3.3.8/lib/
-# GLFW = -lglfw -L./Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.8/lib/
-# GLFW = -lglfw -L./Users/$(USER)/.brew/opt/glfw/lib
-# GLFW = -lglfw -L./Users/$(USER)/.brew/Cellar/glfw/lib
+# GLFW = -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/
+# GLFW = -lglfw -L/Users/$(USER)/goinfre/.brew/opt/glfw/3.3.8/lib/
+GLFW = -lglfw -L/Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.8/lib/
+# GLFW = -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib
+# GLFW = -lglfw -L/Users/$(USER)/.brew/Cellar/glfw/lib
 
 # ------------------------------------------------------------------------ MLX42
 MLX42 = $(MLX42_DIR)build/libmlx42.a
@@ -41,9 +40,9 @@ OBJS_DIR = ./objs/
 
 # ------------------------------------------------------------------------- MAND
 SRC = main.c \
+	dptr_op.c \
 	init_mlx_elements.c \
 	state_print.c \
-	lst_to_dptr.c \
 	key_handling.c \
 	arg_validation.c \
 	lines_validation.c \
@@ -59,9 +58,9 @@ OBJS_FLAG = $(OBJS_DIR).mand_flag
 
 # ------------------------------------------------------------------------ BONUS
 SRC_BONUS = main_bonus.c \
+	dptr_op_bonus.c \
 	init_mlx_elements_bonus.c \
 	state_print_bonus.c \
-	lst_to_dptr_bonus.c \
 	key_handling_bonus.c \
 	arg_validation_bonus.c \
 	lines_validation_bonus.c \
@@ -76,7 +75,7 @@ SRC_BONUS = main_bonus.c \
 	exit_err_handling_bonus.c \
 	reset_images_bonus.c \
 	possible_move_calc_bonus.c
-ifneq ($(filter bonus re_bonus,$(MAKECMDGOALS)),)
+ifneq ($(filter bonus,$(MAKECMDGOALS)),)
 	OBJS = $(addprefix $(OBJS_DIR), $(SRC_BONUS:.c=.o))
 	OBJS_FLAG = $(OBJS_DIR).bonus_flag
 endif
@@ -96,13 +95,14 @@ INCLUDE = -I ./include/ \
 # 2) add $(LEAK_FINDER) to the the rule which build the program
 # 3) add #include "malloc.h at the top of the main .h file
 # 4) add function show_alloc_mem_ex() where you want to monitor the memory
+# !!!) Remember to remove if don't needed!
 LEAK_FINDER = -L./leak_finder -lft_malloc
 LEAK_FINDER_INCLUDE = -I./leak_finder/includes
 GET_LEAK_FINDER = git clone https://github.com/iwillenshofer/leak_finder.git leak_finder
 GET_LEAK_FINDER_ALT = git clone git@github.com:iwillenshofer/leak_finder.git leak_finder
 
 # *******************************************************************************
-# 																			RULES
+#                                                                           RULES
 # *******************************************************************************
 all: $(NAME)
 
@@ -147,16 +147,15 @@ fclean: clean
 
 re: fclean all
 
-re_bonus: fclean bonus
-
 # -------------------------------------------------------- MLX42 & DEPENDENCIES
 $(MLX42): $(MLX42_DIR)
-	@echo "$(NC)Compiling $@..."
+	@echo "$(NC)Compiling [$@]..."
 	cd $(MLX42_DIR) && cmake -B build
 	$(MAKE) -C $(MLX42_DIR)build -j4
 
 $(MLX42_DIR):
 	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
+	cd $(MLX42_DIR) && rm -rf .git
 
 clean_mlx:
 	@echo "$(NC)Removing [MLX42 build]..."
@@ -167,6 +166,25 @@ fclean_mlx:
 	@echo "$(NC)Removing [MLX42]..."
 	@rm -rf $(MLX42_DIR)
 	@echo "$(G)	[MLX42] removed!"
+
+# ------------------------------------------------------------------- MAP TESTS
+test: $(NAME)
+	@for map in $(shell ls ./maps/invalid/); do \
+		echo "$(Y)Test [$$map]$(NC)"; \
+		cat ./maps/invalid/$$map; \
+		echo "$(G)Result:$(NC)"; \
+		./$(NAME) ./maps/invalid/$$map; \
+		echo "___________________________________\n"; \
+	done
+
+test_bonus: $(NAME)
+	@for map_bonus in $(shell ls ./maps/bonus_invalid/); do \
+		echo "$(Y)Test [$$map_bonus]$(NC)"; \
+		cat ./maps/bonus_invalid/$$map_bonus; \
+		echo "$(G)Result:$(NC)"; \
+		./$(NAME) ./maps/bonus_invalid/$$map_bonus; \
+		echo "___________________________________\n"; \
+	done
 
 # ---------------------------------------------------------------- LEAKS FINDER
 leaks: $(LEAK_FINDER)
@@ -192,4 +210,4 @@ Y = \033[0;33m
 R = \033[0;31m
 NC = \033[0m
 
-.PHONY: all clean fclean fclean_mlx re bonus leaks
+.PHONY: all clean fclean fclean_mlx re bonus leaks test

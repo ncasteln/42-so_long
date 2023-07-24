@@ -6,17 +6,15 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 16:52:36 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:34:01 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-// #			 include "malloc.h" // remove// remove// remove
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include "libnc.h"
 # include "MLX42.h"
 # include "so_long_struct.h"
 # include <fcntl.h>	// open() and close() fd
@@ -78,7 +76,13 @@ void	redraw_items(t_state *game, char c);
 // ----------------------------------------------------------------------- MOVES
 void	p_move(t_state *game, int y, int x);
 
+// ------------------------------------------------------------------------ DPTR
+int		dptr_size(char **s, char axis);
+void	dptr_print(char **p);
+char	**dptr_deepcpy(char **src);
+
 // ----------------------------------------------------------------------- UTILS
+void	dptr_free(char **p);
 void	free_data(t_data *data);
 void	free_state(t_state *game);
 void	err_print(int err_code);

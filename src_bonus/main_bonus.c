@@ -6,23 +6,16 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:23:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 16:48:57 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:31:22 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	leaks(void)
-{
-		show_alloc_mem_ex(); // remove
-}
-
 int32_t	main(int argc, char **argv)
 {
 	t_state	game;
 	t_data	data;
-
-	atexit(leaks); // remove
 
 	ft_bzero(&game, sizeof(t_state));
 	ft_bzero(&data, sizeof(t_data));

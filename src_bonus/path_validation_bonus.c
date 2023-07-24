@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:21:52 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 12:52:11 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 09:29:21 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	check_neighbors(char **map, int y, int x, int *items)
 	int	d_limit;
 	int	r_limit;
 
-	d_limit = nc_dptr_size_y(map) - 1;
-	r_limit = nc_dptr_size_x(map) - 1;
+	d_limit = dptr_size(map, 'y') - 1;
+	r_limit = dptr_size(map, 'x') - 1;
 	if ((y - 1 > 0) && count_item(map[y - 1][x], &items[0], &items[1]))
 	{
 		map[y - 1][x] = ' ';
@@ -62,11 +62,11 @@ void	is_valid_path(t_data *data)
 
 	items[0] = data->c;
 	items[1] = data->e;
-	map_cpy = nc_dptr_deepcpy(data->map);
+	map_cpy = dptr_deepcpy(data->map);
 	if (!map_cpy)
 		return (free_data(data), err_print(MAP_FAIL));
 	check_neighbors(map_cpy, data->p.y, data->p.x, items);
 	if (items[0] != 0 || items[1] != 0)
-		return (free_data(data), nc_dptr_free(map_cpy), err_print(INV_PATH));
-	return (nc_dptr_free(map_cpy));
+		return (free_data(data), dptr_free(map_cpy), err_print(INV_PATH));
+	return (dptr_free(map_cpy));
 }

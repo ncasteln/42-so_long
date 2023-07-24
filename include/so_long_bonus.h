@@ -6,17 +6,15 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 16:52:31 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:33:19 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
-			// # include "malloc.h" // remove// remove// remove// remove// remove
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include "libnc.h"
 # include "MLX42.h"
 # include "so_long_struct_bonus.h"
 # include <fcntl.h>	// open() and close() fd
@@ -76,11 +74,18 @@ void	redraw_items(t_state *game, char c);
 void	reset_image(t_state *game, char c);
 
 // ----------------------------------------------------------------------- MOVES
+int		is_blocked(t_data *data);
 int		is_possible_move(t_state *game, int y, int x, char c);
 void	p_move(t_state *game, int y, int x);
-void	n_move(t_state *game);
+void	n_handler(t_state *game);
+
+// ------------------------------------------------------------------------ DPTR
+int		dptr_size(char **s, char axis);
+void	dptr_print(char **p);
+char	**dptr_deepcpy(char **src);
 
 // ----------------------------------------------------------------------- UTILS
+void	dptr_free(char **p);
 void	free_state(t_state *game);
 void	free_data(t_data *data);
 void	err_print(int err_code);

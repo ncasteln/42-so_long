@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 13:05:37 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 14:57:46 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:29:25 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ void	reset_image(t_state *game, char c)
 		reset_p_image(game);
 	else if (c == 'N')
 		reset_n_image(game);
-	else if (c == 'S')
-	{
-		mlx_delete_image(game->mlx, img->steps_img);
-		img->steps_img = mlx_put_string(game->mlx, data->steps_str, 16, 16);
-	}
 	else if (c == 'E')
 	{
 		mlx_delete_image(game->mlx, img->e);

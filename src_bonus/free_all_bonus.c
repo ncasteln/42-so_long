@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:21:06 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 16:46:59 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 09:09:37 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	free_state(t_state *game)
 void	free_data(t_data *data)
 {
 	if (data->map)
-		nc_dptr_free(data->map);
+		dptr_free(data->map);
 	if (data->lines)
 		ft_lstclear(&data->lines, del_line);
 	if (data->steps_str)

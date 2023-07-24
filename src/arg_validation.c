@@ -6,11 +6,30 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:02:21 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 11:59:05 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 14:38:33 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static int	is_valid_ext(const char *s, const char *ext)
+{
+	int	i;
+
+	if (!s || !ext)
+		return (0);
+	i = ft_strlen(s) - 1;
+	while (i >= 0)
+	{
+		if (s[i] == '.')
+		{
+			if (!(ft_strncmp(s + i, ext, ft_strlen(ext))))
+				return (1);
+		}
+		i--;
+	}
+	return (0);
+}
 
 static t_list	*lines_to_lst(const char *path)
 {
@@ -40,7 +59,7 @@ static t_list	*lines_to_lst(const char *path)
 
 void	validate(int argc, char **argv, t_data *data)
 {
-	if (!(argc == 2) || !(nc_is_valid_ext(argv[1], ".ber")))
+	if (!(argc == 2) || !(is_valid_ext(argv[1], ".ber")))
 		return (free_data(data), err_print(INV_ARG));
 	data->lines = lines_to_lst(argv[1]);
 	if (!data->lines)

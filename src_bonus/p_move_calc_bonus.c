@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 15:08:03 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 13:17:03 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:35:43 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ void	p_move(t_state *game, int y, int x)
 	else if (game->data->map[next_py][next_px] == '0')
 		p_to_0(game, next_py, next_px);
 	redraw_items(game, 'P');
+	display_steps(game);
 }

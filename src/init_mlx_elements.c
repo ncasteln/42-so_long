@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 11:34:18 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/21 16:44:17 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:00:01 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_window(t_state *game)
 	int		size_x;
 	int		size_y;
 
-	size_x = nc_dptr_size_x(game->data->map);
-	size_y = nc_dptr_size_y(game->data->map);
+	size_x = dptr_size(game->data->map, 'x');
+	size_y = dptr_size(game->data->map, 'y');
 	width = size_x * 64;
 	height = size_y * 64;
 	if (width > WIDTH_LIMIT || height > HEIGHT_LIMIT)
@@ -38,7 +38,7 @@ int	init_textures(t_state *game)
 	game->txt->p = mlx_load_png("./textures/player_r.png");
 	game->txt->e_0 = mlx_load_png("./textures/exit_0.png");
 	game->txt->e_1 = mlx_load_png("./textures/exit_1.png");
-	game->txt->pe_r = mlx_load_png("./textures/player_exit_r.png");
+	game->txt->pe_r = mlx_load_png("./textures/pe_r.png");
 	game->txt->c = mlx_load_png("./textures/coll.png");
 	game->txt->ground = mlx_load_png("./textures/ground.png");
 	game->txt->wall = mlx_load_png("./textures/wall.png");
