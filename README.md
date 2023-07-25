@@ -10,7 +10,7 @@ C programming - data structure - videogames - MLX42 library
 
 
 ## Subject
-In this project I had to create a simple top-down view videogame, using C as programming language, and the [MLX42 Codam](https://github.com/codam-coding-college/MLX42.git) library.
+In this project I had to create a simple top-down view videogame, using C as programming language, and the [MLX42 Codam](https://github.com/codam-coding-college/MLX42.git) library. For more info about the requirements, take a look at the [subject](en.subject.pdf) contained in this repo.
 
 ## Brief explanation
 The project covers the following topics:
@@ -23,6 +23,9 @@ During the validation process, the data is collected and stored into a so called
 
 ### 3. Use of the graphical library
 It is mandatory the use of MLX42 library, which handles the window and the images. For a deeper knowledge, I suggest to give a read to the official documentation of [MLX42](https://github.com/codam-coding-college/MLX42.git)
+
+### 4. Leaks free
+Like in any other project of 42, the memory allocated by `malloc()` has to be properly freed. No leaks are tolerated. In this project I checked the leaks using a project of a school mate, which re-implements the `malloc()` function and traces the allocated memory. Take a look at the amazing project of [iwillenshofer](https://github.com/iwillenshofer/leak_finder).
 
 ## Bonus
 The bonus part of the project is about add some simple animations to the sprites, make the player lose in case of touching an enemy and display the steps done directly on the screen instead of output them on the terminal.
