@@ -1,6 +1,7 @@
 # so_long
 
-push_swap is a project developed for 42 Heilbroon School.
+so_long is a project developed for 42 Heilbroon School.
+
 ## Keywords
 C programming - data structure - videogames - MLX42 library
 
