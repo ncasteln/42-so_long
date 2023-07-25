@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 13:31:17 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/24 16:25:42 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:07:27 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_window(t_state *game)
 
 int	init_textures(t_state *game)
 {
-	game->txt = malloc (sizeof(mlx_texture_t) * 11);
+	game->txt = malloc (sizeof(mlx_texture_t) * 10);
 	if (!game->txt)
 		return (0);
 	game->txt->p_r = mlx_load_png("./textures/player_r.png");
@@ -45,7 +45,6 @@ int	init_textures(t_state *game)
 	game->txt->ground = mlx_load_png("./textures/ground.png");
 	game->txt->wall = mlx_load_png("./textures/wall.png");
 	game->txt->n = mlx_load_png("./textures/npc.png");
-	game->txt->ne = mlx_load_png("./textures/npc_e.png");
 	return (1);
 }
 

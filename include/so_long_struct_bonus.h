@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 14:23:55 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/24 15:00:02 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:10:55 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_char
 // @ int			steps;		n of steps done
 // @ char			*steps_str;	steps in string format to display
 // @ int			is_end;		if the game is over
+
 typedef struct s_data
 {
 	struct s_char	p;
@@ -85,6 +86,7 @@ typedef struct s_data
 // @ struct s_img	*img;		ptr images of the game
 // @ struct s_txt	*txt;		ptr to textures of the game
 // @ mlx_t			*mlx;		ptr mlx structure
+
 typedef struct s_state
 {
 	struct s_data	*data;

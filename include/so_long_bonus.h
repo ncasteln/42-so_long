@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:20:58 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/24 16:33:19 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:14:27 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "MLX42.h"
 # include "so_long_struct_bonus.h"
 # include <fcntl.h>	// open() and close() fd
-# include <math.h>	// rand() func
 
 # ifndef WIDTH_LIMIT
 #  define WIDTH_LIMIT 2560

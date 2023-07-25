@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 13:09:38 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/24 16:25:12 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:03:17 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	p_can_move(t_state *game, int y, int x)
 	next_py = game->data->p.y + y;
 	next_px = game->data->p.x + x;
 	cell = game->data->map[next_py][next_px];
-	if (cell == '0' || cell == 'C' || (cell == 'E' && game->data->c > 0))
+	if (cell == '0' || cell == 'C' || (cell == 'E'))
 		return (1);
 	else if (cell == 'N')
 	{
@@ -30,8 +30,6 @@ static int	p_can_move(t_state *game, int y, int x)
 		game->data->map[game->data->p.y][game->data->p.x] = '0';
 		return (1);
 	}
-	else if ((cell == 'E' && game->data->c == 0))
-		return (1);
 	return (0);
 }
 

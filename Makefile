@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/24 16:49:02 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/25 09:20:48 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ GLFW = -lglfw -L/Users/$(USER)/goinfre/.brew/Cellar/glfw/3.3.8/lib/
 # ------------------------------------------------------------------------ MLX42
 MLX42 = $(MLX42_DIR)build/libmlx42.a
 MLX42_DIR = ./lib/MLX42/
+MLX42_REPO = https://github.com/codam-coding-college/MLX42.git
 
 # ------------------------------------------------------------------------- SRCS
 VPATH = ./src/:./src_bonus/
@@ -113,7 +114,7 @@ $(NAME): $(MYLIB) $(MLX42) $(OBJS) $(OBJS_FLAG)
 	@$(CC) $(CFLAGS) \
 	$(OBJS) $(MYLIB) $(MLX42) $(GLFW) \
 	-o $(NAME)
-	@echo "$(G)	$@ successfully compiled!"
+	@echo "$(G)	$@ successfully compiled!";
 
 $(MYLIB):
 	@echo "$(NC)Compiling dependencies..."
@@ -149,13 +150,14 @@ re: fclean all
 
 # -------------------------------------------------------- MLX42 & DEPENDENCIES
 $(MLX42): $(MLX42_DIR)
-	@echo "$(NC)Compiling [$@]..."
-	cd $(MLX42_DIR) && cmake -B build
-	$(MAKE) -C $(MLX42_DIR)build -j4
+	@echo "$(NC)Compiling [MLX42]..."
+	@cd $(MLX42_DIR) && cmake -B build
+	@$(MAKE) -C $(MLX42_DIR)build -j4
 
 $(MLX42_DIR):
-	git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR)
-	cd $(MLX42_DIR) && rm -rf .git
+	@echo "$(NC)Cloning [MLX42] repository..."
+	@git clone $(MLX42_REPO) $(MLX42_DIR)
+	@cd $(MLX42_DIR) && rm -rf .git
 
 clean_mlx:
 	@echo "$(NC)Removing [MLX42 build]..."

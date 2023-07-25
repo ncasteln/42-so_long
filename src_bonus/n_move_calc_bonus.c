@@ -6,7 +6,7 @@
 /*   By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:20:43 by ncasteln          #+#    #+#             */
-/*   Updated: 2023/07/24 16:28:21 by ncasteln         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:03:26 by ncasteln         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	n_handler(t_state *game)
 				find_move(&next_n);
 			n_move(game, next_n.y, next_n.x);
 			redraw_items(game, 'N');
-			state_print(game);
 		}
 	}
 }
