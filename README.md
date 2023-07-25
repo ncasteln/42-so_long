@@ -5,7 +5,7 @@ push_swap is a project developed for 42 Heilbroon School.
 C programming - data structure - videogames - MLX42 library
 
 <div align="center">
-	<img src="./example.gif" style="width: 100%;" alt="Short video example of the game">
+	<img src="./example.gif" alt="Short video example of the game">
 </div>
 
 
