@@ -6,7 +6,7 @@
 #    By: ncasteln <ncasteln@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/29 15:21:33 by ncasteln          #+#    #+#              #
-#    Updated: 2023/07/25 09:20:48 by ncasteln         ###   ########.fr        #
+#    Updated: 2023/07/25 15:09:13 by ncasteln         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ INCLUDE = -I ./include/ \
 # 1) add $(LEAK_FINDER_INCLUDE) to the rule which makes objects
 # 2) add $(LEAK_FINDER) to the the rule which build the program
 # 3) add #include "malloc.h at the top of the main .h file
-# 4) add function show_alloc_mem_ex() where you want to monitor the memory
+# 4) add function print_leaks() where you want to monitor the memory
 # !!!) Remember to remove if don't needed!
 LEAK_FINDER = -L./leak_finder -lft_malloc
 LEAK_FINDER_INCLUDE = -I./leak_finder/includes
